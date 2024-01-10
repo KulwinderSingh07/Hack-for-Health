@@ -1,9 +1,13 @@
 import './App.css';
+import {Routes,Route} from "react-router-dom"
+import MainDashBoardComponent from './components/mainDashBoard';
 
 function App() {
   return (
     <div className="App">
-      <div>Hello</div>
+      <Routes>
+      <Route exact path='/' element={<MainDashBoardComponent/>}/>
+      </Routes>
     </div>
   );
 }

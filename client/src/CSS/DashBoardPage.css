@@ -1,0 +1,38 @@
+.DashBoardWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space-between;
+    width: 100%;
+    height: 100vh;
+    border: 1px solid black;
+}
+
+.DashBoardHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    border: 1px solid black;
+}
+
+.OperationCardsWrapper{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border: 1px solid black;
+}
+.GraphWrapper{
+    border: 1px solid black;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.BottomGraphs{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border: 1px solid black;
+}
