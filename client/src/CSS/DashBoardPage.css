@@ -1,8 +1,10 @@
 .DashBoard{
     display: flex;
     flex-direction: row;
-    justify-content: left;
     background-color: #222b5d;
+    justify-content: center;
+    /* border-style: solid; */
+    /* border-color: red; */
 }
 .DashBoardWrapper{
     display: flex;
