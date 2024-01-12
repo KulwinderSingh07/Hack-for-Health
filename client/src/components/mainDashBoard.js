@@ -7,6 +7,7 @@ import LineGraphCompoent from "./mainGraphCompoent";
 import ControlsComponent from "./controllerCompoent";
 import BottomRightCompoent from "./bottomRightCompoent";
 
+
 const MainDashBoardComponent = () => {
     return (
         <div className="DashBoard">

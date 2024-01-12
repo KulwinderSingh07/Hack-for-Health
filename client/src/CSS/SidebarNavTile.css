@@ -1,0 +1,27 @@
+.sidebarNavTileDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Raleway', sans-serif;
+    border-style: solid;
+    /* border-color: red; */
+    border-width: 0px;
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+    background-color: #0067ff;
+    border-radius: 20px;
+    color: white;
+    transition: all 0.1s ease-in-out;
+}
+
+.sidebarNavTileDiv:hover{
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500;600&display=swap');
+
