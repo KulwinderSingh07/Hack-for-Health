@@ -133,7 +133,45 @@
 
 .removeExerciseDiv:hover{
     cursor: pointer;
-    transform: scale(1.07)
+    transform: scale(1.07);
 }
 
+.addToListDIv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(91, 91, 255);
+    color:white;
+    padding: 5px;
+    border-radius: 5px;
+    transition: all 0.5 ease-in-out;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-style: solid;
+    border-color: blue;
+}
 
+.addToListDIv:hover{
+    cursor: pointer;
+    transform: scale(1.07);
+}
+
+.searchExerciseHeaderInput{
+    width: 30vw;
+    height: 1.5vw;
+    background-color: #244eae;
+    border: none;
+    color: white;
+    font-size: 1vw;
+    border-style: solid;
+    border-width: 1px;
+    padding:0.1vw;
+}
+
+input::placeholder{
+    color: white;
+    font-size: 1vw;
+    padding-left: 1vw;
+}
