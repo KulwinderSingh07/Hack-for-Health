@@ -1,6 +1,6 @@
 import "../CSS/cardComponents.css"
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
-const OperationsCardComponent = () => {
+const PdfUploaderCardComponent = () => {
     return ( 
             <div className="Card">
                 <div className="cardContent">
@@ -17,4 +17,4 @@ const OperationsCardComponent = () => {
      );
 }
  
-export default OperationsCardComponent;
+export default PdfUploaderCardComponent;

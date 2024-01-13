@@ -36,6 +36,18 @@
     justify-content: space-between;
     flex-direction: column;
 }
+
+.leftCardPart button{
+    width:fit-content;
+    display: flex;
+    align-items: center;
+}
+
+.popUpControl{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .rightCardPart{
     width: 20%;
     display: flex;
