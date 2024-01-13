@@ -15,10 +15,9 @@ import '../../CSS/MyExercises.css';
 import GymData from '../../data/gymExercises.json';
 
 const MyExercises = () => {
-
 //Accordian Colors concept:
-  const notCompletedColor = 'linear-gradient(to right, #ff9a9e, #fad0c4)';
-  const completedColor = 'linear-gradient(to right,#aef359,white)';
+  const notCompletedColor = 'linear-gradient(to right,#fa6167, #fad0c4)';
+  const completedColor = 'linear-gradient(to right,#32b965,white)';
 
   return (
     <>
@@ -30,7 +29,7 @@ const MyExercises = () => {
         {/*My Exercises Rendering below*/}
         <div className='myExercisesMap'>
         {
-          GymData.map((exercise,indexMain)=>{
+          GymData?GymData.map((exercise,indexMain)=>{
             return (
               <>
               <Accordion className='accordianMaterialUi' sx={{backgroundImage:exercise.completed?completedColor:notCompletedColor,marginTop:'0.5vw',marginBottom:'0.5vw'}}>
@@ -43,7 +42,7 @@ const MyExercises = () => {
 
                   sx={{fontSize:'0.5vw',display:'flex',justifyContent:'space-between',alignItems:'center'}}
                 >
-                  <h1>{exercise.name.toUpperCase()}</h1>
+                  <h1 style={{color:'white'}}>{exercise.name.toUpperCase()}</h1>
 
                 </AccordionSummary>
 
@@ -100,7 +99,7 @@ const MyExercises = () => {
                 
               </>
             );
-          })
+          }):<></>
         }
         </div>
         </div>
