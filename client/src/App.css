@@ -2,3 +2,9 @@
     margin: 0;
     padding: 0;
 }
+
+.mainAppDiv{
+    display: flex;
+    /* border-style: solid; */
+    width: 100vw;
+}

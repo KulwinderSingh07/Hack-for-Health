@@ -1,17 +1,17 @@
 import React from 'react'
 import Sidebar from './Sidebar'
 import Dashboard from './mainDashBoard';
+import ExercisesPage from './ExercisesPage';
 
-//CSS IMPORTS 
-import '../CSS/MainPage.css';
 
 const MainPage = () => {
   return (
-    <div className='mainPageMainDiv'>
-        <Sidebar/>
+    <div>
 
         {/*Conditional Rendering between components*/}
-        <Dashboard/>
+        <div className='renderSectionDiv'>
+            <Dashboard/>
+        </div>
     </div>
   )
 }
