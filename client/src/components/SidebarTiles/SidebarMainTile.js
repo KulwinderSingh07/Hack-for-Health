@@ -15,7 +15,7 @@ const SidebarTile = () => {
         <img src={DoctorImage} className='iconSideBar'/>
         
         <div className='sidebarTileMainBottom'>
-          <HealthAndSafetyIcon style={{fontSize:'7vh',marginBottom:'-1.5vh'}}/>
+          <HealthAndSafetyIcon style={{fontSize:'4vw',marginBottom:'-1.5vh'}}/>
           <h2>Health Management System</h2>
         </div>
     </div>

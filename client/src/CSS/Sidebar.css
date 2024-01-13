@@ -1,16 +1,11 @@
 .sideBarMainDiv{
-    border-style: solid;
+    /* border-style: solid; */
     border-width: 0px;
     /* border-color: red; */
     background-color: #34448b;
-    width: 30vh;
-    margin-right: 5vh;
-    position: absolute;
-    height: 100vh;
-}
-
-.sideBarBottom{
-    position: absolute;
-    left: 0;
-    bottom: 0;
+    width: 15vw;
+    /* position: absolute; */
+    min-width: 270px;
+    min-height: 100vh;
+    /* height: 100vh; */
 }

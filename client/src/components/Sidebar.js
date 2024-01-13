@@ -6,7 +6,7 @@ import { Divider } from '@mui/material'
 import SidebarNavTile from './SidebarTiles/SidebarSideNavTile';
 
 const Sidebar = () => {
-  const iconsArray = ['Dashboard','Exercises','Upload History'];
+  const iconsArray = ['Dashboard','Exercises','Upload History','Calendar Summary','LogOut'];
 
   return (
     <>
@@ -19,11 +19,6 @@ const Sidebar = () => {
     {iconsArray.map((item)=>{
       return <SidebarNavTile key={item} iconName={item}/>;
     })}
-
-    {/*Bottom Logic for Log Out*/}
-    <div className='sideBarBottom'>
-      <SidebarNavTile iconName={'LogOut'}/>
-    </div>
 
     </div>
     </>

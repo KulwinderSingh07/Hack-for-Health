@@ -16,12 +16,14 @@
     border-radius: 20px;
     color: white;
     transition: all 0.1s ease-in-out;
+    min-width: 100px;
 }
 
 .sidebarNavTileDiv:hover{
     transform: scale(1.05);
     cursor: pointer;
 }
+
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500;600&display=swap');
 

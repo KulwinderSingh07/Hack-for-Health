@@ -1,0 +1,38 @@
+.exerisesMainDiv{
+    width: 85vw;
+    /* border-style: solid; */
+    background-color: #222b5d;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+}
+
+.exercisesSuggestionHeader{
+    width: 100%;
+    background-color: #244eae;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1vw;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    color: white;
+}
+
+.exercisesHeaderText{
+    font-family: 'Raleway', sans-serif;
+}
+
+.myExercises{
+    /* border-style: solid; */
+    width: 42.5vw;
+}
+
+.searchExercises{
+    width: 42.5vw;
+}
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500;600&display=swap');
