@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { useEffect, useState } from "react";
 import { Line } from 'react-chartjs-2';
 
 ChartJS.register(
@@ -21,74 +22,143 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
-    bezierCurve : true,
-  responsive: true,
-  interaction: {
-    mode: 'index',
-    intersect: false,
-  },
-  stacked: false,
-  plugins: {
-    title: {
-      display: true,
-      text: 'Overview',
-      color:'white'
+const LineGraphCompoent = ({graphData}) => {
+  const [labels, setlabels] = useState(['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL','AUG','SEP','OCT','NOV','DEC'])
+
+  const [options, setOptions] = useState(
+    {
+      // bezierCurve : true,
+    responsive: true,
+    maintainAspectRatio:true,
+    animations: {
+      tension: {
+        duration: 1000,
+        easing: 'linear',
+        from: 2,
+        to: 0,
+        loop: false
+      }
     },
-  },
-  scales: {
-    y: {
-      type: 'linear',
-      display: true,
-      position: 'left',
-      ticks: {
-        color: 'white', // set the color of the y-axis ticks to white
-    }
+    interaction: {  
+      mode: 'index',
+      intersect: false,
     },
-    y1: {
-      type: 'linear',
-      display: true,
-      position: 'right',
-      grid: {
-        drawOnChartArea: false,
+    stacked: false,
+    plugins: {
+      title: {
+        display: false,
+        text: 'Overview',
+        color:'white'
       },
-      ticks: {
-        color: 'white', // set the color of the y-axis ticks to white
-    }
+      legend: {
+        labels: {
+          color: 'white', // Change the legend item color here
+          textAlign:'left'
+        },
+        position:'top',
+      },
     },
-    x:{
+    scales: {
+      y: {
+        type: 'linear',
+        display: true,
+        position: 'left',
+        title:{
+          text:"Title",
+          display:true,
+          color:'white',
+        },
         ticks: {
-            color: 'white', // set the color of the y-axis ticks to white
+          color: 'white', // set the color of the y-axis ticks to white
+      }
+      },
+      y1: {
+        type: 'linear',
+        display: true,
+        position: 'right',
+        grid: {
+          drawOnChartArea: false,
+        },
+        ticks: {
+          color: 'white', // set the color of the y-axis ticks to white
+        },
+      },
+      x:{
+        ticks: {
+            stepSize:10,
+              color: 'white', // set the color of the y-axis ticks to white
+          },
+          datasets: {
+            line: {
+                barPercentage: 0.2, // Adjust the width of the bars
+                categoryPercentage: 0.6 // Adjust the space between bars
+            }
         }
-    }   
-  },
-};
-
-const labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL','AUG','SEP','OCT','NOV','DEC'];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      color:'white',
-      data:[-1000,200,-600,-200,800,-1000,900,250,300,450,-300,1200],
-      borderColor: '#00d0c2',
-      backgroundColor: '#4c71f0',
-      yAxisID: 'y',
+      }   
     },
-    {
-      label: 'Dataset 2',
-      data:[1000,800,-200,-900,-600,6000,400],
-      borderColor: '#4c71f0',
-      backgroundColor: '#00d0c2',
-      yAxisID: 'y1',
-    },
-  ],
-};
+  }
+  )
 
-const LineGraphCompoent = () => {
-        return <Line className="graphContainer" options={options} data={data} />;
+  const [dataToDispaly, setDataToDispaly] = useState(
+    {
+      labels,
+      datasets: [
+        {
+          label: 'Dataset 2',
+          data:[1000,800,-200,-900,-600,6000,400],
+          borderColor: '#4c71f0',
+          backgroundColor: '#00d0c2',
+          yAxisID: 'y1',
+        },
+      ],
+    }
+  )
+
+  // const handleGraphDataChanges=(toggeledGraphData)=>{
+  //   if(toggeledGraphData!==undefined){
+
+  //     console.log(toggeledGraphData)
+  //     const newDataVal={
+  //       label:toggeledGraphData.label,
+  //       data:toggeledGraphData.data,
+  //       color:'white',
+  //       borderColor: '#4c71f0',
+  //       backgroundColor: '#00d0c2',
+  //       yAxisID:'y',
+  //     }
+  //     const tempDataVal= data
+  //     tempDataVal.datasets.push(newDataVal)
+  //     console.log(tempDataVal)
+  //     setData(tempDataVal)
+  //   }
+  // }
+
+  useEffect(()=>{
+    if(graphData!==undefined){
+        // Update the data based on your logic
+        const newData = {
+          ...dataToDispaly,
+          datasets: [
+            {
+              ...dataToDispaly.datasets[0],
+              data: dataToDispaly.datasets[0].data
+            },
+            {...graphData}
+          ],
+        };
+        setDataToDispaly(newData);
+    }else{
+      console.log("hello")
+    }
+  },[graphData])
+        return (
+          <div className="graph">
+            {dataToDispaly &&
+            <Line className="graphContainer" options={options} data={dataToDispaly} />
+            }
+          </div>
+        )
+        
 }
  
 export default LineGraphCompoent;

@@ -1,0 +1,30 @@
+.Controlls{
+    margin-top: 5%;
+}
+.barContainer{
+    width: 100%;
+    height: 10px;
+    /* border: 1px solid white; */
+    background-color: #222b5d;
+    border-radius: 1rem;
+}
+
+.barValue{
+    background-color: #4c71f0;
+    width: 50%;
+    border-radius: 1rem;
+    height: 100%;
+}
+
+.barWrapper{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+.barDetails{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    margin-bottom: 8px;
+    justify-content: space-between;
+}

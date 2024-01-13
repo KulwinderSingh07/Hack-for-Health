@@ -14,9 +14,7 @@
     justify-content:space-between;
     width: 80%;
     height: 100vh;
-    /* border: 1px solid black; */
     border-radius: 1rem;
-    /* background-color: #222b5d; */
     color: white;
 }
 
@@ -50,20 +48,48 @@
     /* border: 1px solid black; */
     width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    /* justify-content: center; */
     height: 35%;
     align-items: center;
     border-radius: 1rem;
     background-color: #34448b;
     margin-bottom: 1.3%;
 }
+
+.GraphContainerHeader{
+    display: flex;
+    width: 97%;
+    /* align-items:baseline; */
+    height: fit-content;
+    margin-top: 0.8%;
+    justify-content: space-between;
+}
+.GraphContainerHeader button{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 4px;
+    font-size:medium;
+    padding-bottom: 4px;
+    border-radius:0.2rem;
+    background-color: #3c3d43;
+    border: none;
+    margin-left: 2px;
+    cursor: pointer;
+    color: white;
+}
+
+.MainGraphContainer{
+    width: 100%;
+    height: 90%;
+}
+
 .BottomGraphs{
     display:flex;
     align-items: center;
     justify-content: space-between;
     border-radius: 1rem;
     width: 100%;
-    /* border: 1px solid black; */
     height: 35%;
     margin-bottom: 1.3%;
 }

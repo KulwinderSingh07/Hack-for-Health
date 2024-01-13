@@ -4,6 +4,8 @@ import OperationsCardComponent from './components/pdfUploaderCard';
 import MainPage from './components/MainPage';
 import ExercisesPage from './components/ExercisesPage';
 import Sidebar from './components/Sidebar';
+// import Sidebar from "./components/Sidebar";
+import PopUpCompoent from './components/popUpComponent';
 
 function App() {
   return (
@@ -14,7 +16,7 @@ function App() {
         <Sidebar/>
       <Routes>
       <Route exact path='/' element={<MainPage/>} />
-      <Route exact path='/card' element={<OperationsCardComponent/>}/>
+      <Route exact path='/popup' element={<PopUpCompoent/>}/>
       <Route exact path='/exercises' element={<ExercisesPage/>}/>
       </Routes>
 
