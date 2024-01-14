@@ -8,7 +8,7 @@ const DietCardComponent = ({handleDietClickOpen}) => {
             <div className="Card dietCard">
                 <div className="cardContent">
             <div className="leftCardPart">
-                <h3>Total Patients</h3>
+                <h3>Dietory Recommended</h3>
                 <div className="popUpControl">
                 <IconButton
                     // size="large"
@@ -16,9 +16,9 @@ const DietCardComponent = ({handleDietClickOpen}) => {
                     >
                     <OpenInNewIcon fontSize="large" style={{ color: 'white' }} />
                 </IconButton>
-                {/* <div>Click to Expand</div> */}
+                <h3>Click to Expand</h3>
                     </div>
-                <h3>Total patient Admitted:32,303</h3>
+                <h3>Total Number of Diet Items:12</h3>
             </div>
             <div className="rightCardPart">
                 <div className="cardLogo"><FoodBankIcon fontSize="large"/></div>

@@ -14,7 +14,7 @@
     align-items: flex-end;
     justify-content:space-between;
     width: 90%;
-    height: 100vh;
+    height: 92.3vh;
     border-radius: 1rem;
     color: white;
     /* border-style: solid; */
@@ -42,7 +42,7 @@
     justify-content: space-between;
     width: 100%;
     /* border: 1px solid black; */
-    height: 15%;
+    height: 17%;
     border-radius: 1rem;
     /* margin-bottom: 5vw; */
     margin-top: 1vw;
@@ -53,7 +53,7 @@
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
-    height: 40%;
+    height: 44%;
     align-items: center;
     border-radius: 1rem;
     background-color: #34448b;
@@ -102,7 +102,7 @@
     justify-content: space-between;
     border-radius: 1rem;
     width: 100%;
-    height: 32%;
+    height: 30%;
     margin-bottom: 1.3%;
 }
 
