@@ -1,0 +1,20 @@
+.calendarStyle{
+    transform: scale(var(--calendar-scale));
+    margin: var(--calendar-margin);
+}
+
+/* Apply different scaling factors based on viewport width */
+@media (min-width: 900px) {
+    :root {
+      --calendar-scale: 2; /* Adjust the scale value as needed */
+      --calendar-margin: 170px;
+    }
+  }
+  
+  @media (max-width: 899px) {
+    :root {
+      --calendar-scale: 1; /* Adjust the scale value as needed */
+      --calendar-margin: 50px;
+    }
+  }
+  
