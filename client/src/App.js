@@ -1,9 +1,9 @@
 import './App.css';
 import {Routes,Route} from "react-router-dom"
-import OperationsCardComponent from './components/pdfUploaderCard';
 import MainPage from './components/MainPage';
 import ExercisesPage from './components/ExercisesPage';
 import Sidebar from './components/Sidebar';
+import CalendarMainPage from './components/CalendarMainPage';
 // import Sidebar from "./components/Sidebar";
 import PopUpCompoent from './components/popUpComponent';
 
@@ -16,8 +16,9 @@ function App() {
         <Sidebar/>
       <Routes>
       <Route exact path='/' element={<MainPage/>} />
-      <Route exact path='/popup' element={<PopUpCompoent/>}/>
+      <Route exact path='/card' element={<OperationsCardComponent/>}/>
       <Route exact path='/exercises' element={<ExercisesPage/>}/>
+      <Route exact path='/calendar' element={<CalendarMainPage/>}/>
       </Routes>
 
       </div>
