@@ -1,6 +1,20 @@
-.mainCalendarPageDiv{
+.calenderOutermostDiv{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
     /* border-style: solid; */
-    /* border-color: red; */
-    width: 85vw;
     background-color: #222b5d;
+    flex-wrap: wrap;
 }
+
+.mainCalendarPageDiv{
+    border-style: solid;
+    border-color: red;
+    width: 85vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
