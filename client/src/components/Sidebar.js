@@ -6,7 +6,7 @@ import { Divider } from '@mui/material'
 import SidebarNavTile from './SidebarTiles/SidebarSideNavTile';
 
 const Sidebar = () => {
-  const iconsArray = ['Dashboard','Exercises','Upload History','Calendar Summary','LogOut'];
+  const iconsArray = ['Dashboard','Exercises','Upload History','Calendar Tracking','LogOut'];
 
   return (
     <>

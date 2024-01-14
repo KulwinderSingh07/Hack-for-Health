@@ -22,6 +22,8 @@ const SidebarNavTile = ({iconName}) => {
             navigate("/card");
         }else if(name == 'Exercises'){
             navigate("/exercises");
+        }else if(name == 'Calendar Tracking'){
+            navigate("/calendar");
         }
     }
 
@@ -41,10 +43,10 @@ const SidebarNavTile = ({iconName}) => {
             <PictureAsPdfIcon style={{fontSize:'2vw',marginRight:'1vh'}}/> 
             <h4>Upload History</h4>
         </div>);
-    }else if(iconName == 'Calendar Summary'){
+    }else if(iconName == 'Calendar Tracking'){
         return (<div onClick={()=>{handleNavigate(iconName)}} className='sidebarNavTileDiv'>
             <EventAvailableIcon style={{fontSize:'2vw',marginRight:'1vh'}}/> 
-            <h4>Calendar Summary</h4>
+            <h4>Calendar Tracking</h4>
         </div>);
     }else if(iconName == 'LogOut'){
         return (
