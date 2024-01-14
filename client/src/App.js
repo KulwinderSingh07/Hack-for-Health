@@ -4,6 +4,7 @@ import MainPage from './components/MainPage';
 import ExercisesPage from './components/ExercisesPage';
 import Sidebar from './components/Sidebar';
 import CalendarMainPage from './components/CalendarMainPage';
+import UploadHistoryPage from './components/UploadHistoryPage';
 // import Sidebar from "./components/Sidebar";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Route exact path='/' element={<MainPage/>} />
       <Route exact path='/exercises' element={<ExercisesPage/>}/>
       <Route exact path='/calendar' element={<CalendarMainPage/>}/>
+      <Route exact path='/uploadHistory' element={<UploadHistoryPage/>} />
       </Routes>
 
       </div>
