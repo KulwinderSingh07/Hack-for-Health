@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Calendar } from 'react-multi-date-picker';
 import { DateObject } from 'react-multi-date-picker';
 
-import '../CSS/CalendarMUI.css';
-
 const YourComponent = () => {
     console.log(new DateObject().set({day:5}));
 
@@ -17,6 +15,7 @@ const YourComponent = () => {
   return (
       <Calendar
         className='calendarStyle'
+        style={{transform:'scale(1.5)',margin:'100px'}}
         value={values}
         multiple
         range
