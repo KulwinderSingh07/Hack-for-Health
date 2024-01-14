@@ -78,7 +78,7 @@ const DocnutChartCompoent = ({donutData}) => {
     }
   },[donutData])
     return (
-        <div>  
+        <div className='donutWrapper'>  
         {dataToDisaply && <Doughnut className="donutChart"  data={dataToDisaply} options={options}/>}
         </div>
     )

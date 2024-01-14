@@ -6,7 +6,7 @@ const ControlsComponent = ({donutData})=> {
         <div className="controlerWrapper">
             <div className="controlerContainer">
             <div className="leftControlerPart">
-                <h3>Hospital Performance</h3>
+                {/* <h3>Hospital Performance</h3>    */}
                 <div className="donutContianer">
                 <DocnutChartCompoent donutData={donutData}/>
                 </div>

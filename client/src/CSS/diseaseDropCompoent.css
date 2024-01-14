@@ -1,0 +1,7 @@
+.diseaseDrop{
+    width: 50vw;
+    overflow: auto;
+    height: 50vh;
+    max-height: 100%;
+    scroll-behavior: smooth;
+}
