@@ -9,8 +9,8 @@
 }
 
 .mainCalendarPageDiv{
-    border-style: solid;
-    border-color: red;
+    /* border-style: solid; */
+    /* border-color: red; */
     width: 85vw;
     display: flex;
     flex-direction: row;
@@ -35,6 +35,81 @@
     padding-bottom: 15px;
     border-style: solid;
     border-color: green;
-    margin-left: 10vw;
     border-width: 0px;
+}
+
+.maindateDivWrapper{
+    border-style: solid;
+    justify-content: center;
+    background-color: #244eae;
+    padding: 25px;
+    border-radius: 20px;
+    border-color: blue;
+}
+
+.inputMonthStyle{
+    width: 100%;
+    color: white;
+    outline:none;
+    background-image: linear-gradient(to top right,rgb(107, 107, 245),rgb(109, 255, 255));
+    border-radius: 5px;
+    outline: none;
+}
+
+#month-label{
+    color: white;
+}
+
+.dateDataCalendarTile{
+    margin-top: 30px;
+}
+
+
+#month-select{
+    outline: none;
+}
+
+.dateTimeDataTile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border-style: solid; */
+    text-align: center;
+    /* border-color: red; */
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 1vw;
+    border-radius: 20px;
+    background-image: linear-gradient(to top right,rgb(17, 167, 17),rgb(111, 250, 111));
+    color: white;
+}
+
+.pinkDateDiv{
+    border-radius: 20px;
+    background-image: linear-gradient(to top right,pink,purple);
+    justify-content: center;
+    margin-top: 1vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    margin-right: 20px;
+}
+
+.pinkDateDiv h2{
+    margin-bottom: 1vw;
+}
+
+.orangeTimeeDiv{
+    border-radius: 20px;
+    background-image: linear-gradient(to top right,rgb(255, 115, 0),rgb(252, 206, 121));
+    justify-content: center;
+    margin-top: 1vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    margin-right: 20px;
+    padding-bottom: 1vw;
+}
+
+.dateDataMapDiv{
+    max-height: 15vw;
+    overflow-y: auto;
 }
