@@ -5,6 +5,7 @@
     /* border-style: solid; */
     background-color: #222b5d;
     flex-wrap: wrap;
+    font-family: 'Raleway', sans-serif;
 }
 
 .mainCalendarPageDiv{
@@ -16,5 +17,24 @@
     justify-content: center;
     align-items: center;
     height: 90vh;
+    flex-wrap: wrap;
 }
 
+.dateDataDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:white;
+    color:black;
+    padding: 20px;
+    border-radius: 10px;
+    transition: all 0.5 ease-in-out;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-style: solid;
+    border-color: green;
+    margin-left: 10vw;
+    border-width: 0px;
+}

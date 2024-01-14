@@ -95,7 +95,7 @@ const UploadHistoryPage = () => {
                 <div>
       <ListItemButton
       className='listItem'
-      sx={{marginBottom:"1vh", borderRadius:"1rem",background:"CE16EC",background:"linear-gradient(225deg, #CE16EC, #4F7EF2)",":hover":{backgroundColor:"#4156ca"}}}
+      sx={{marginBottom:"1vh", borderRadius:"1rem",background:"CE16EC",background:"linear-gradient(225deg, #0067ff, #6e95f5)",":hover":{backgroundColor:"#4156ca"}}}
       >
         <div className='listItemWrapper'>
           <div className='listItemObject'>
@@ -103,16 +103,16 @@ const UploadHistoryPage = () => {
           <FileDownloadIcon style={{color:"white"}} fontSize='medium'/>
         </IconButton>
           </div>
-        <Typography  className='listItemObject' sx={{fontSize:"large",fontWeight:"bold"}}>{ele.val}</Typography>
-        <Typography className='listItemObject'  sx={{fontSize:"large",fontWeight:"bold"}}>{ele.date}</Typography>
+        <Typography  className='listItemObject' sx={{fontSize:"large",fontWeight:"bold",color:'white'}}>{ele.val}</Typography>
+        <Typography className='listItemObject'  sx={{fontSize:"large",fontWeight:"bold",color:'white'}}>{ele.date}</Typography>
         <div className='popUpOutput listItemObject'>
-          <Typography  sx={{fontSize:"large",fontWeight:"bold" }}>{ele.output}</Typography>      
+          <Typography  sx={{fontSize:"large",fontWeight:"bold" ,color:'white'}}>{ele.output}</Typography>      
         <IconButton
         onClick={()=>{
           handleClick(index)
         }}
         >
-          <OpenInFullIcon fontSize='medium'/>
+          <OpenInFullIcon sx={{color:'white'}} fontSize='medium'/>
         </IconButton>
         </div>
         </div>

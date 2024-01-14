@@ -1,5 +1,6 @@
 import React from 'react';
 import CalendarMUI from './CalendarMUI';
+import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import CircleIcon from '@mui/icons-material/Circle';
 
 //CSS
@@ -25,14 +26,11 @@ const CalendarMainPage = () => {
               <h2>Today's Date</h2>
             </div> */}
             <div className='dateDataDiv'>
-                    <CircleIcon sx={{marginRight:'10px'}}/>
-                    <h3>TODAY'S DATE</h3>
+                    <DirectionsRunIcon sx={{marginRight:'10px',fontSize:'5vw'}}/>
+                    <h3 style={{fontSize:'1.5vw'}}>EXERCISE COMPLETED DAYS</h3>
+                    <CircleIcon sx={{marginLeft:'10px',fontSize:'1.5vw',color:'#0074d9'}}/>
             </div>
 
-            <div className='dateDataDiv'>
-                    <CircleIcon sx={{marginRight:'10px'}}/>
-                    <h3>TODAY'S DATE</h3>
-            </div>
 
           </div>
 
