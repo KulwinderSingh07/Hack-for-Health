@@ -8,6 +8,7 @@ import ControlsComponent from "./controllerCompoent";
 import BottomRightCompoent from "./bottomRightCompoent";
 import { useState } from "react";
 import PopUpCompoent from "./popUpComponent";
+import SpeedIcon from '@mui/icons-material/Speed';
 
 
 const MainDashBoardComponent = () => {
@@ -82,11 +83,17 @@ const MainDashBoardComponent = () => {
     
     return (
         <div className="DashBoard">
+            <div className='exercisesSuggestionHeader'>
+                <SpeedIcon sx={{fontSize:'2vw',marginRight:'15px',marginTop:'-0.2vw'}}/><h3 className='exercisesHeaderText'>DASHBOARD</h3>
+                </div>
+
             <div className="DashBoardWrapper">
-                <div className="DashBoardHeader">
+                {/* <div className="DashBoardHeader">
                     <h1>Dashboard</h1>
                     <img src={ProfileDemo}></img>
-                </div>
+                </div> */}
+                
+
             <div className="OperationCardsWrapper">
                 <PdfUploaderCardComponent/>
                 <ExerciseCardComponent  handleExerClickOpen={handleExerClickOpen}/>
