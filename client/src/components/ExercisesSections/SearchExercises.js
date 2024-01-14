@@ -30,7 +30,7 @@ const SearchExercises = () => {
         const newData = GymData.filter((val)=>{
             if(searchTerm == ""){
                 return val;
-            }else if(val.bodyPart.toLowerCase().includes(searchTerm.toLowerCase()) || val.name.toLowerCase().includes(searchTerm.toLowerCase()) || val.target.toLowerCase().includes(searchTerm.toLowerCase()) || secondaryCheck(val,searchTerm.toLocaleLowerCase)!=-1){
+            }else if(val.bodyPart.toLowerCase().includes(searchTerm.toLowerCase()) || val.name.toLowerCase().includes(searchTerm.toLowerCase()) || val.target.toLowerCase().includes(searchTerm.toLowerCase()) || secondaryCheck(val,searchTerm.toLowerCase())!=-1){
                 return val;
             }
         });
