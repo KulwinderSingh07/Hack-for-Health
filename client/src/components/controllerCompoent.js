@@ -5,12 +5,12 @@ const ControlsComponent = ({donutData})=> {
     return ( 
         <div className="controlerWrapper">
             <div className="controlerContainer">
-            <div className="leftControlerPart">
-                {/* <h3>Hospital Performance</h3>    */}
+            {/* <div className="leftControlerPart">
+                <h3>Hospital Performance</h3>   
                 <div className="donutContianer">
                 <DocnutChartCompoent donutData={donutData}/>
                 </div>
-            </div>
+            </div> */}
             <div className="rightControlerPart">
                 <h3>Doctor Treatment Plan</h3>
                 <ControlerButtonComponent />

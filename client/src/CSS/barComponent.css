@@ -1,5 +1,6 @@
 .Controlls{
     margin-top: 5%;
+    width: 100%;
 }
 .barContainer{
     width: 100%;
@@ -20,6 +21,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
+    width: 75%;
 }
 .barDetails{
     display: flex;
@@ -27,4 +29,13 @@
     flex-direction: row;
     margin-bottom: 8px;
     justify-content: space-between;
+}
+.vitalsContainer{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+}
+.vitalsBasicInfo{
+    font-size: larger;
 }

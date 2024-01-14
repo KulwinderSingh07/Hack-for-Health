@@ -11,7 +11,7 @@ const BarComponent = ({data}) => {
         <div className="barWrapper">
             <div className="barDetails">
             <h4>{data.heading}</h4>
-            <p>{getPercentage(data)}%</p>
+            <p>{data.val}</p>
             </div>
         <div className="barContainer">
             <div className="barValue" style={{width:`${getPercentage(data)}%`}} ></div>

@@ -8,6 +8,7 @@ import ControlsComponent from "./controllerCompoent";
 import BottomRightCompoent from "./bottomRightCompoent";
 import { useState } from "react";
 import PopUpCompoent from "./popUpComponent";
+import SymptomSelectorCompoent from "./symptomsDropDownCompoent";
 import SpeedIcon from '@mui/icons-material/Speed';
 
 
@@ -74,6 +75,50 @@ const MainDashBoardComponent = () => {
         )
     }
 
+    const [selectedArea, setSelectedArea] = useState(
+        [
+            {
+                junctionName:"Symton 1",
+                checkBoxSelected:false
+            },
+            {
+                junctionName:"Symton 2",
+                checkBoxSelected:false
+            },
+            {
+                junctionName:"Symton 2",
+                checkBoxSelected:false
+            }
+            ,
+            ,
+            {
+                junctionName:"Symton 2",
+                checkBoxSelected:false
+            },
+            ,
+            {
+                junctionName:"Symton 2",
+                checkBoxSelected:false
+            },
+            ,
+            {
+                junctionName:"Symton 2",
+                checkBoxSelected:false
+            },
+            ,
+            {
+                junctionName:"Symton 2",
+                checkBoxSelected:false
+            },
+            ,
+            {
+                junctionName:"Symton 2",
+                checkBoxSelected:false
+            },
+
+        ]
+    )
+
 
 
     
@@ -103,8 +148,12 @@ const MainDashBoardComponent = () => {
             </div>
             <div className="GraphWrapper">
                 <div className="GraphContainerHeader">
-                    <h3>Overview</h3>
-                    <div>
+                    <h3>Vitals Graph</h3>
+                    <h3>Symptoms List</h3>
+                </div>
+                <div className="MainGraphContainer">
+                <LineGraphCompoent graphData={graphData}/>
+                <div className="graphControllButtons">
                         <button style={{backgroundColor:selectedButton==0?'#222b5d':'#3c3d43'}}
                         onClick={()=>{
                             handlePatientData(0)
@@ -131,10 +180,10 @@ const MainDashBoardComponent = () => {
                         }}
                         >LifeTime</button>
                     </div>
+                <div className="symptomsWrapper">
+                    <SymptomSelectorCompoent selectedArea={selectedArea} setSelectedArea={setSelectedArea}/>
                 </div>
-                <div className="MainGraphContainer">
-                <LineGraphCompoent graphData={graphData}/>
-                </div>
+                </div>  
             </div>
             <div className="BottomGraphs">
                 <ControlsComponent donutData={donutData}/>

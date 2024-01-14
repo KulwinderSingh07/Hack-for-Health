@@ -24,7 +24,11 @@ const ControlerButtonComponent = () => {
         <FormGroup>
         {List.map((val)=>{
                 return(
+                    <div className='vitalsContainer'>
+                    <div className='vitalsBasicInfo'>Min:{val.min}</div>
                     <BarComponent data={val}/>
+                    <div className='vitalsBasicInfo'>Max:{val.max}</div>
+                    </div>
         )
         })
     }
