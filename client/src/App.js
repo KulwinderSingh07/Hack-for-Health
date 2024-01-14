@@ -5,7 +5,6 @@ import ExercisesPage from './components/ExercisesPage';
 import Sidebar from './components/Sidebar';
 import CalendarMainPage from './components/CalendarMainPage';
 // import Sidebar from "./components/Sidebar";
-import PopUpCompoent from './components/popUpComponent';
 
 function App() {
   return (
@@ -16,7 +15,6 @@ function App() {
         <Sidebar/>
       <Routes>
       <Route exact path='/' element={<MainPage/>} />
-      <Route exact path='/card' element={<OperationsCardComponent/>}/>
       <Route exact path='/exercises' element={<ExercisesPage/>}/>
       <Route exact path='/calendar' element={<CalendarMainPage/>}/>
       </Routes>
