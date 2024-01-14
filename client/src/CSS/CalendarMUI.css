@@ -1,0 +1,37 @@
+
+.calendarStyle{
+    transform: scale(var(--calendar-scale));
+    /* border-style: solid; */
+}
+
+@media (min-width: 700px) {
+    :root {
+      --calendar-scale: 2; /* Adjust the scale value as needed */
+    }
+  }
+  
+  @media (max-width: 699px) {
+    :root {
+      --calendar-scale: 1; /* Adjust the scale value as needed */
+    }
+  }
+  
+
+.dateDataDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:#7fdbff;
+    color:white;
+    padding: 20px;
+    border-radius: 10px;
+    transition: all 0.5 ease-in-out;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-style: solid;
+    border-color: green;
+    margin-left: 10vw;
+    border-width: 0px;
+}
