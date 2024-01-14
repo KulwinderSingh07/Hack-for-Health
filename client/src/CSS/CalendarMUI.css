@@ -7,7 +7,7 @@
 @media (min-width: 900px) {
     :root {
       --calendar-scale: 2; /* Adjust the scale value as needed */
-      --calendar-margin: 170px;
+      --calendar-margin: 190px;
     }
   }
   
