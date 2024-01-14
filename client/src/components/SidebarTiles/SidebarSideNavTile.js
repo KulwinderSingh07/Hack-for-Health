@@ -24,6 +24,8 @@ const SidebarNavTile = ({iconName}) => {
             navigate("/exercises");
         }else if(name == 'Calendar Tracking'){
             navigate("/calendar");
+        }else if(name == 'Upload History'){
+            navigate("/uploadHistory");
         }
     }
 
