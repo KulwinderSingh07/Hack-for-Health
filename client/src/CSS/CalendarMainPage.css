@@ -48,7 +48,7 @@
 }
 
 .inputMonthStyle{
-    width: 100%;
+    width: 45%;
     color: white;
     outline:none;
     background-image: linear-gradient(to top right,rgb(107, 107, 245),rgb(109, 255, 255));
@@ -80,13 +80,13 @@
     margin-bottom: 15px;
     padding-bottom: 1vw;
     border-radius: 20px;
-    background-image: linear-gradient(to top right,rgb(17, 167, 17),rgb(111, 250, 111));
+    background-color: white;
     color: white;
 }
 
 .pinkDateDiv{
     border-radius: 20px;
-    background-image: linear-gradient(to top right,purple,pink);
+    background-image: linear-gradient(to top right,blue,#0074d9);
     justify-content: center;
     margin-top: 1vw;
     padding-left: 1vw;
@@ -100,7 +100,7 @@
 
 .orangeTimeeDiv{
     border-radius: 20px;
-    background-image: linear-gradient(to top right,rgb(255, 115, 0),rgb(252, 206, 121));
+    background-image: linear-gradient(to top right,blue,#0074d9);
     justify-content: center;
     margin-top: 1vw;
     padding-left: 1vw;
@@ -113,4 +113,9 @@
     max-height: 15vw;
     overflow-y: auto;
     padding: 10px;
+}
+
+.monthYearDiv{
+    display: flex;
+    justify-content: space-between;
 }

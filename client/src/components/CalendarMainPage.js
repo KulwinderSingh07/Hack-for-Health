@@ -15,9 +15,18 @@ import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 
 const CalendarMainPage = () => {
   const [selectedMonth, setSelectedMonth] = useState(1); // Default to January
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+
+  // Assuming you want a range of years, adjust the startYear and endYear accordingly
+  const startYear = 2020;
+  const endYear = new Date().getFullYear() + 5; // Adjust as needed
 
   const handleChangeMonth = (event) => {
     setSelectedMonth(event.target.value);
+  };
+
+  const handleChangeYear = (event) => {
+    setSelectedYear(event.target.value);
   };
 
   return (
@@ -42,6 +51,8 @@ const CalendarMainPage = () => {
 
             {/*Rows rendering days of the current month */}
               <div className='dateDataCalendarTile'>
+
+                <div className='monthYearDiv'>
                 {/*Select Month DropDown */}
               <FormControl className='inputMonthStyle'>
                 <Select
@@ -59,6 +70,24 @@ const CalendarMainPage = () => {
                   ))}
                 </Select>
               </FormControl>
+                {/*Select Year DropDown */}
+              <FormControl className='inputMonthStyle'>
+                <Select
+                  labelId="month-label"
+                  id="month-select"
+                  value={selectedYear}
+                  label="Select Month"
+                  onChange={handleChangeYear}
+                  sx={{color:'white',outlineColor:'white'}}
+                >
+                  {Array.from({ length: endYear - startYear + 1 }, (_, index) => (
+                    <MenuItem key={startYear + index} value={startYear + index}>
+                      {startYear + index}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              </div>
 
               {/*Rendering date/times */}
             <div className='dateDataMapDiv'>
