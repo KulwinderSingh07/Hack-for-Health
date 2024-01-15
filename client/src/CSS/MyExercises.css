@@ -168,6 +168,8 @@
     border-style: solid;
     border-width: 1px;
     padding:0.1vw;
+    margin-left: 5vw;
+    margin-right: 5vw;
 }
 
 input::placeholder{

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -8,16 +8,46 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
+import axios from 'axios';
+
 //CSS
 import '../../CSS/MyExercises.css';
 
 //GYM LOCAL DATA
-import GymData from '../../data/gymExercises.json';
+// import GymData from '../../data/gymExercises.json';
 
 const MyExercises = () => {
+  const [GymData,setGymData] = useState([]);
+
 //Accordian Colors concept:
   const notCompletedColor = 'linear-gradient(to right,#fa6167, #fad0c4)';
   const completedColor = 'linear-gradient(to right,#32b965,white)';
+
+
+  const options = {
+    method: 'GET',
+    url: 'https://exercisedb.p.rapidapi.com/exercises/bodyPart/back',
+    params: {limit: '10'},
+    headers: {
+      'X-RapidAPI-Key': '49a6667aa7msh48de9f0b760cd1cp1cb90ajsnaf5f8e52cf00',
+      'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
+    }
+  };
+
+  const fetchGymData = async()=>{
+    try {
+      const response = await axios.request(options);
+      console.log(response.data);
+      setGymData(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(()=>{
+      fetchGymData();
+  },[])
+  
 
   return (
     <>

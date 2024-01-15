@@ -48,7 +48,7 @@ const SearchExercises = () => {
     <div className='searchExercises'>
     <div className='exercisesSuggestionHeader'>
         <input onChange={(e)=>setSearchTerm(e.target.value)} style={{marginRight:'15px'}} placeholder='SEARCH EXERCISES FOR SPECIFIC TARGET MUSCLES ...' className='searchExerciseHeaderInput'/>
-        <SearchIcon onClick={()=>{handleSearch()}} sx={{fontSize:'1.5vw',marginTop:'-0.2vw',paddingTop:'0.2vw',paddingBottom:'0.2vw',paddingRight:'0.5vw',paddingLeft:'0.5vw',backgroundImage:'linear-gradient(to top right,green,aqua)',borderRadius:'10px',":hover":{cursor:'pointer'}}}/>
+        <SearchIcon onClick={()=>{handleSearch()}} sx={{marginRight:'5vw',fontSize:'1.5vw',marginTop:'-0.2vw',paddingTop:'0.2vw',paddingBottom:'0.2vw',paddingRight:'0.5vw',paddingLeft:'0.5vw',backgroundImage:'linear-gradient(to top right,green,aqua)',borderRadius:'10px',":hover":{cursor:'pointer'}}}/>
         </div>
 
         {/*My Exercises Rendering below*/}
