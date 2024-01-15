@@ -7,7 +7,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CancelIcon from '@mui/icons-material/Cancel';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-
+import FileDownloadDoneIcon from '@mui/icons-material/FileDownloadDone';
+import CelebrationIcon from '@mui/icons-material/Celebration';
 import axios from 'axios';
 
 //CSS
@@ -20,6 +21,8 @@ const MyExercises = () => {
   // const [GymData,setGymData] = useState([]);
   const [username,setUsername] = useState("");
   const [email,setEmail] = useState("");
+  const [completedMsg,setCompletedMsg] = useState();
+
 
 //Accordian Colors concept:
   const notCompletedColor = 'linear-gradient(to right,#fa6167, #fad0c4)';
@@ -34,6 +37,10 @@ const MyExercises = () => {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  const markDone = () =>{
+    console.log('mark done');
   }
 
   useEffect(()=>{
@@ -123,6 +130,16 @@ const MyExercises = () => {
             );
           }):<></>
         }
+        </div>
+
+        <div onClick={()=>{markDone()}} className='removeExerciseDiv' style={{marginLeft:'2.5vw',marginRight:'2.5vw',backgroundColor:'#0067ff',borderColor:'#244eae'}}>
+            <FileDownloadDoneIcon sx={{marginRight:'10px'}}/>
+            <h3>Mark exercises done for the day</h3>
+        </div>
+
+        <div style={{color:'white',display:'flex',justifyContent:'center',alignContent:'center',fontSize:'1vw',margin:'1vw'}}>
+        <h3>Congratulations, all exercises completed for the day</h3>
+        <CelebrationIcon/>
         </div>
         </div>
     </>
