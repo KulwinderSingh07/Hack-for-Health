@@ -23,6 +23,12 @@ app.use("/exercise",exerciseRoute);
 const calendarRoute = require('./routes/calendarRoute');
 app.use("/calendar",calendarRoute);
 
+
+const pdfRoute=require("./routes/pdfHistory")
+app.use("/pdfHistory",pdfRoute);
+
+
+
 app.listen(PORT,()=>{
     console.log(`server running on port ${PORT}`);
 })
