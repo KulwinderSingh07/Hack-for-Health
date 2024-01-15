@@ -1,7 +1,7 @@
 import "../CSS/controlerCompoent.css"
 import ControlerButtonComponent from "./controlerButtonComponent";
 import DocnutChartCompoent from "./donutChart";
-const ControlsComponent = ({donutData})=> {
+const ControlsComponent = ({donutData,pdfReportData})=> {
     return ( 
         <div className="controlerWrapper">
             <div className="controlerContainer">
@@ -12,8 +12,8 @@ const ControlsComponent = ({donutData})=> {
                 </div>
             </div> */}
             <div className="rightControlerPart">
-                <h3>Doctor Treatment Plan</h3>
-                <ControlerButtonComponent />
+                <h3>Vital Readings</h3>
+                <ControlerButtonComponent pdfReportData={pdfReportData} />
             </div>
             </div>
         </div>

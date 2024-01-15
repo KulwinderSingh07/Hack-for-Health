@@ -7,16 +7,24 @@ import { useState } from "react";
 import  axios from "axios";
 
 
-const PdfUploaderCardComponent = () => {
+const PdfUploaderCardComponent = ({setPdfReportData}) => {
     const [file, setFile] = useState(undefined)
     const uploadReport=async (e)=>{
         e.preventDefault();
-        console.log(file)
+        console.log(file.name)
         const formData= new FormData()
         formData.append('pdf_file',file);
         console.log(formData)
         const resp=await axios.post("http://3.109.238.31:4001/extract",formData)
         console.log(resp.data)
+        const dataForSending={
+            fileName:file.name,
+            email:"laddi",
+            vitalData:resp.data
+        }
+        const reportDocument=await axios.post("http://localhost:3001/pdfHistory/create",dataForSending)
+        console.log(reportDocument.data)
+        setPdfReportData(reportDocument.data)
     }
     return ( 
             <div className="Card">

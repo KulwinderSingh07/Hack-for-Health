@@ -19,10 +19,17 @@ const MainDashBoardComponent = () => {
 
     const [graphData, setGraphData] = useState()
     const [donutData, setDonutData] = useState()
+
     const [openDiet, setOpenDiet] = useState(false)
 
     const [symptomsList, setsymptomsList] = useState([])
     const [symptomsPredictionHistory, setSymptomsPredictionHistory] = useState([])
+    const [pdfReportData, setPdfReportData] = useState({
+        fileName:"",
+        creationDate:"",
+        userEmail:"",
+        FoodItems:[],
+        vitalsList:[]})
 
     const PredictingDiseaseBasedOnSymptoms=async()=>{
         const symptomsData={
@@ -155,11 +162,11 @@ const MainDashBoardComponent = () => {
                 
 
             <div className="OperationCardsWrapper">
-                <PdfUploaderCardComponent/>
-                <ExerciseCardComponent  handleExerClickOpen={handleExerClickOpen}/>
+                <PdfUploaderCardComponent setPdfReportData={setPdfReportData}/>
+                <ExerciseCardComponent  handleExerClickOpen={handleExerClickOpen} pdfReportData={pdfReportData}/>
                 <PopUpCompoent open={openExercise} setOpen={setOpenExercise} data={data}/>
                 <DietCardComponent handleDietClickOpen={handleDietClickOpen}/>
-                <PopUpCompoent open={openDiet} setOpen={setOpenDiet} data={data}/>
+                <PopUpCompoent open={openDiet} setOpen={setOpenDiet} pdfReportData={pdfReportData} title={"Recommended Food Items"}/>
             </div>
             <div className="GraphWrapper">
                 <div className="GraphContainerHeader">
@@ -201,7 +208,7 @@ const MainDashBoardComponent = () => {
                 </div>  
             </div>
             <div className="BottomGraphs">
-                <ControlsComponent donutData={donutData}/>
+                <ControlsComponent donutData={donutData} pdfReportData={pdfReportData}/>
                 <BottomRightCompoent symptomsPredictionHistory={symptomsPredictionHistory}/>
             </div>
         </div>

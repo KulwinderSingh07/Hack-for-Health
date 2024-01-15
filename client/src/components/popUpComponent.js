@@ -19,10 +19,11 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-const PopUpCompoent = ({open,setOpen,data}) => {
+const PopUpCompoent = ({open,setOpen,title,pdfReportData}) => {
     const handleClose = () => {
       setOpen(false);
     };
+    console.log(pdfReportData)
     return ( 
         <Fragment>
           <Dialog onClose={handleClose}
@@ -35,7 +36,7 @@ const PopUpCompoent = ({open,setOpen,data}) => {
           aria-labelledby="customized-dialog-title"
           > */}
           <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-            Modal title
+           {title}
           </DialogTitle>
           <IconButton
             aria-label="close"
@@ -51,16 +52,22 @@ const PopUpCompoent = ({open,setOpen,data}) => {
           </IconButton>
           <DialogContent dividers>
             <Typography gutterBottom>
-             {data}
+             File Name : {pdfReportData?pdfReportData.fileName:""}
             </Typography>
+            {pdfReportData!=undefined?pdfReportData.FoodItems.map((val)=>{
+              return (
             <Typography gutterBottom>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-              Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+             Disease Name : {val?val.disease:""}
             </Typography>
+              )
+            })
+          :
+          <Typography>
+            Hello
+          </Typography>
+          }
             <Typography gutterBottom>
-              Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
-              magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
-              ullamcorper nulla non metus auctor fringilla.
+              
             </Typography>
           </DialogContent>
         {/* </BootstrapDialog> */}

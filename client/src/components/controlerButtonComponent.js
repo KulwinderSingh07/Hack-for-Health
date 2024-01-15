@@ -6,7 +6,7 @@ import { useState } from 'react';
 import BarComponent from './barComponent';
 import "../CSS/barComponent.css"
 
-const ControlerButtonComponent = () => {
+const ControlerButtonComponent = ({pdfReportData}) => {
     const [List, setList] = useState([{
         min:2,
         max:10,
@@ -22,12 +22,12 @@ const ControlerButtonComponent = () => {
     return ( 
         <div className='Controlls'>
         <FormGroup>
-        {List.map((val)=>{
+        {pdfReportData.vitalsList.map((val)=>{
                 return(
                     <div className='vitalsContainer'>
-                    <div className='vitalsBasicInfo'>Min:{val.min}</div>
+                    <div className='vitalsBasicInfo'>Min:{val.lower_limit}</div>
                     <BarComponent data={val}/>
-                    <div className='vitalsBasicInfo'>Max:{val.max}</div>
+                    <div className='vitalsBasicInfo'>Max:{val.upper_limit}</div>
                     </div>
         )
         })

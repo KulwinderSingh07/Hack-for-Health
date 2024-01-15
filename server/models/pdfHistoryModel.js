@@ -1,7 +1,7 @@
 const mongoose=require("mongoose")
 const pdfHistoryDataSchema=mongoose.Schema({
     fileName:{
-        type:Array
+        type:String
     },
     creationDate:{
         type:Date,
