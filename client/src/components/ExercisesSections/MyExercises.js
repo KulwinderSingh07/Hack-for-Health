@@ -14,38 +14,30 @@ import axios from 'axios';
 import '../../CSS/MyExercises.css';
 
 //GYM LOCAL DATA
-// import GymData from '../../data/gymExercises.json';
+import GymData from '../../data/gymExercises.json';
 
 const MyExercises = () => {
-  const [GymData,setGymData] = useState([]);
+  // const [GymData,setGymData] = useState([]);
+  const [username,setUsername] = useState("");
+  const [email,setEmail] = useState("");
 
 //Accordian Colors concept:
   const notCompletedColor = 'linear-gradient(to right,#fa6167, #fad0c4)';
   const completedColor = 'linear-gradient(to right,#32b965,white)';
 
 
-  const options = {
-    method: 'GET',
-    url: 'https://exercisedb.p.rapidapi.com/exercises/bodyPart/back',
-    params: {limit: '10'},
-    headers: {
-      'X-RapidAPI-Key': '49a6667aa7msh48de9f0b760cd1cp1cb90ajsnaf5f8e52cf00',
-      'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
-    }
-  };
-
   const fetchGymData = async()=>{
     try {
-      const response = await axios.request(options);
+      const response = await axios.post('http://localhost:3001/exercise/fetchSuggestedExercises',{username,email});
       console.log(response.data);
-      setGymData(response.data);
+      // setGymData(response.data);
     } catch (error) {
       console.error(error);
     }
   }
 
   useEffect(()=>{
-      fetchGymData();
+      // fetchGymData();
   },[])
   
 

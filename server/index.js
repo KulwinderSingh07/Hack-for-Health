@@ -17,6 +17,9 @@ app.use("/symptomsPrediction",SymptomsHistory)
 const userLoginRoutes = require('./routes/userLoginRoute');
 app.use("/login",userLoginRoutes);
 
+const exerciseRoute = require('./routes/exerciseRoute');
+app.use("/exercise",exerciseRoute);
+
 app.listen(PORT,()=>{
     console.log(`server running on port ${PORT}`);
 })
