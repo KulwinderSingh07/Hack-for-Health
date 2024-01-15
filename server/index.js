@@ -20,6 +20,9 @@ app.use("/login",userLoginRoutes);
 const exerciseRoute = require('./routes/exerciseRoute');
 app.use("/exercise",exerciseRoute);
 
+const calendarRoute = require('./routes/calendarRoute');
+app.use("/calendar",calendarRoute);
+
 app.listen(PORT,()=>{
     console.log(`server running on port ${PORT}`);
 })

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CalendarMUI from './CalendarMUI';
 import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import { Divider, Select } from '@mui/material';
@@ -7,6 +7,7 @@ import {InputLabel} from '@mui/material';
 import {MenuItem} from '@mui/material';
 import { useState } from 'react';
 import Sidebar from './Sidebar';
+import axios from 'axios';
 
 //CSS
 import '../CSS/CalendarMainPage.css';
@@ -17,6 +18,7 @@ import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 const CalendarMainPage = () => {
   const [selectedMonth, setSelectedMonth] = useState(1); // Default to January
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [values,setValues] = useState([]);
 
   // Assuming you want a range of years, adjust the startYear and endYear accordingly
   const startYear = 2020;
@@ -29,6 +31,27 @@ const CalendarMainPage = () => {
   const handleChangeYear = (event) => {
     setSelectedYear(event.target.value);
   };
+
+  const apiFetch = async() =>{
+      const res = await axios.post('http://localhost:3001/calendar/fetchCalendarDates',{email:'simar'});
+      console.log(res);
+      const array = res.data.data.dates;
+
+      if(res.msg == "user currently has no dates"){
+        return;
+      }
+      
+      let newArray=[];
+      for(let i=0;i<array.length;i++){
+        newArray.push(array[i]);
+      }
+
+      setValues(newArray);
+  }
+
+  useEffect(()=>{
+    apiFetch();
+  },[])
 
   return (
     <>
@@ -55,74 +78,24 @@ const CalendarMainPage = () => {
             {/*Rows rendering days of the current month */}
               <div className='dateDataCalendarTile'>
 
-                <div className='monthYearDiv'>
-                {/*Select Month DropDown */}
-              <FormControl className='inputMonthStyle'>
-                <Select
-                  labelId="month-label"
-                  id="month-select"
-                  value={selectedMonth}
-                  label="Select Month"
-                  onChange={handleChangeMonth}
-                  sx={{color:'white',outlineColor:'white'}}
-                >
-                  {Array.from({ length: 12 }, (_, index) => (
-                    <MenuItem key={index + 1} value={index + 1}>
-                      {new Date(2022, index).toLocaleString('default', { month: 'long' })}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-                {/*Select Year DropDown */}
-              <FormControl className='inputMonthStyle'>
-                <Select
-                  labelId="month-label"
-                  id="month-select"
-                  value={selectedYear}
-                  label="Select Month"
-                  onChange={handleChangeYear}
-                  sx={{color:'white',outlineColor:'white'}}
-                >
-                  {Array.from({ length: endYear - startYear + 1 }, (_, index) => (
-                    <MenuItem key={startYear + index} value={startYear + index}>
-                      {startYear + index}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              </div>
-
               {/*Rendering date/times */}
             <div className='dateDataMapDiv'>
-                <div className='dateTimeDataTile'>
+
+              {
+                values.map((item)=>{
+                  return (
+                  <div className='dateTimeDataTile'>
                   <div className='pinkDateDiv'>
-                    <h2>DATE : 24th Jan,2023</h2>
+                    <h2>DATE : {item[0].toString()}/{item[1].toString()}/{item[2].toString()}</h2>
                   </div>
 
                   <div className='orangeTimeeDiv'>
-                    <h2>TIME : 2:00 PM</h2>
+                    <h2>TIME : {item[3]}</h2>
                   </div>
-                </div>
-
-                <div className='dateTimeDataTile'>
-                  <div className='pinkDateDiv'>
-                    <h2>DATE : 24th Jan,2023</h2>
-                  </div>
-
-                  <div className='orangeTimeeDiv'>
-                    <h2>TIME : 2:00 PM</h2>
-                  </div>
-                </div>
-
-                <div className='dateTimeDataTile'>
-                  <div className='pinkDateDiv'>
-                    <h2>DATE : 24th Jan,2023</h2>
-                  </div>
-
-                  <div className='orangeTimeeDiv'>
-                    <h2>TIME : 2:00 PM</h2>
-                  </div>
-                </div>
+                </div>);
+                })
+              }
+                
 
               </div>
             </div>
