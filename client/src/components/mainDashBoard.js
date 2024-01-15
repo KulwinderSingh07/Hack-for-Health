@@ -15,7 +15,7 @@ import  axios from "axios";
 const MainDashBoardComponent = () => {
     const [openExercise, setOpenExercise] = useState(false)
 
-    const [selectedButton, setSelectedButton] = useState(3)
+    const [selectedButton, setSelectedButton] = useState(-1)
 
     const [graphData, setGraphData] = useState()
     const [donutData, setDonutData] = useState()

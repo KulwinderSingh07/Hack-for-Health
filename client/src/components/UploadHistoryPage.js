@@ -123,15 +123,9 @@ const UploadHistoryPage = () => {
       sx={{marginBottom:"1vh", borderRadius:"1rem",background:"CE16EC",background:"linear-gradient(225deg, #0067ff, #6e95f5)",":hover":{backgroundColor:"#4156ca"}}}
       >
         <div className='listItemWrapper'>
-          {/* <div className='listItemObject'> */}
-        {/* <IconButton className='iconForDownload'>
-          <FileDownloadIcon style={{color:"white"}} fontSize='medium'/>
-        </IconButton> */}
-          {/* </div> */}
         <Typography  className='listItemObject' sx={{fontSize:"large",fontWeight:"bold",color:'white'}}>{ele.fileName}</Typography>
         <Typography className='listItemObject'  sx={{fontSize:"medium",fontWeight:"bold",color:'white'}}>{new Date(ele.creationDate).toDateString()}/{getCurrentTimeString(ele.creationDate)}</Typography>
         <div className='popUpOutput listItemObject'>
-          {/* <Typography  sx={{fontSize:'small',fontWeight:"bold" ,color:'white'}}>{ele.output}</Typography>       */}
         <IconButton
         onClick={()=>{
           handleClick(index)
@@ -142,7 +136,7 @@ const UploadHistoryPage = () => {
         </div>
         </div>
       </ListItemButton>
-      <HistoryPopUpCompoent data={"23"} open={openPopUp} index={index} setOpenPopUp={setOpenPopUp}/>
+      <HistoryPopUpCompoent data={ele} open={openPopUp} index={index} setOpenPopUp={setOpenPopUp}/>
                 </div>
             )
           })}
