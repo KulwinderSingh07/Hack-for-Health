@@ -100,18 +100,18 @@ const LineGraphCompoent = ({graphData}) => {
   )
 
   const [dataToDispaly, setDataToDispaly] = useState(
-    {
-      labels,
-      datasets: [
-        {
-          label: 'Dataset 2',
-          data:[1000,800,-200,-900,-600,6000,400],
-          borderColor: '#4c71f0',
-          backgroundColor: '#00d0c2',
-          yAxisID: 'y1',
-        },
-      ],
-    }
+    // {
+    //   labels,
+    //   datasets: [
+    //     {
+    //       label: 'Dataset 2',
+    //       data:[1000,800,-200,-900,-600,6000,400],
+    //       borderColor: '#4c71f0',
+    //       backgroundColor: '#00d0c2',
+    //       yAxisID: 'y1',
+    //     },
+    //   ],
+    // }
   )
 
   // const handleGraphDataChanges=(toggeledGraphData)=>{
@@ -135,18 +135,21 @@ const LineGraphCompoent = ({graphData}) => {
 
   useEffect(()=>{
     if(graphData!==undefined){
+      console.log(graphData)
         // Update the data based on your logic
-        const newData = {
-          ...dataToDispaly,
-          datasets: [
-            {
-              ...dataToDispaly.datasets[0],
-              data: dataToDispaly.datasets[0].data
-            },
-            {...graphData}
-          ],
-        };
-        setDataToDispaly(newData);
+        // const newData = {
+        //   ...dataToDispaly,
+        //   datasets: [
+        //     {
+        //       ...dataToDispaly.datasets[0],
+        //       data: dataToDispaly.datasets[0].data
+        //     },
+        //     {...graphData}
+        //   ],
+        // };
+        setDataToDispaly({
+          datasets:graphData
+        });
     }else{
       console.log("hello")
     }

@@ -10,7 +10,7 @@ import { useState } from "react";
 import PopUpCompoent from "./popUpComponent";
 import SymptomSelectorCompoent from "./symptomsDropDownCompoent";
 import SpeedIcon from '@mui/icons-material/Speed';
-
+import  axios from "axios";
 
 const MainDashBoardComponent = () => {
     const [openExercise, setOpenExercise] = useState(false)
@@ -27,52 +27,13 @@ const MainDashBoardComponent = () => {
         console.log("opens")
         setOpenExercise(true)
     }
+    const endPoints=['','getLastMonthData']
 
-    const handlePatientData=(data)=>{
+    const handlePatientData=async(data)=>{
         setSelectedButton(data)
-        console.log("Hello")
-        setGraphData(
-            {data:[
-            {x:'JAN',y:'-1000'},
-            {x:'FEB',y:'-300'},
-            {x:'MAR',y:'-200'},
-            ],
-            label:'DataSet 3',
-            color:'white',
-            borderColor: '#4c71f0',
-            backgroundColor: '#00d0c2',
-            yAxisID:'y'
-        }
-        )
-        
-        setDonutData(
-            {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [
-                  {
-                    label: '# of Votes',
-                    fontColor:'white',
-                    data: [12, 19, 3, 5,34, 3],
-                    backgroundColor: [
-                      'rgba(255, 99, 132, 1)',
-                      'rgba(54, 162, 235, 1)',
-                      'rgba(255, 206, 86, 1)',
-                      'rgba(75, 192, 192, 1)',
-                      'rgba(153, 102, 255, 1)',
-                      'rgba(255, 159, 64, 1)',
-                    ],
-                    borderColor: [
-                      'white',
-                      'white',
-                      'white',
-                      'white',
-                      'white',
-                    ],
-                    borderWidth: 1.3,
-                  },
-                ],
-              }
-        )
+        const Incominggraphdata=await axios.get(`http://localhost:3001/vital/${endPoints[data]}`)
+        console.log(Incominggraphdata.data)
+        setGraphData(Incominggraphdata.data)
     }
 
     const [selectedArea, setSelectedArea] = useState(
