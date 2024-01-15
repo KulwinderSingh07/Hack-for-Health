@@ -12,6 +12,8 @@ app.use(cors());
 const VitalRoutes=require("./routes/vitalDataRoute")
 app.use("/vital",VitalRoutes)
 
+const userLoginRoutes = require('./routes/userLoginRoute');
+app.use("/login",userLoginRoutes);
 
 app.listen(PORT,()=>{
     console.log(`server running on port ${PORT}`);

@@ -17,15 +17,15 @@ const SidebarNavTile = ({iconName}) => {
 
     const handleNavigate = (name) =>{
         if(name == 'Dashboard'){
-            navigate('/');
-        }else if(name == 'LogOut'){
-            navigate("/card");
+            navigate('/dashboard');
         }else if(name == 'Exercises'){
             navigate("/exercises");
         }else if(name == 'Calendar Tracking'){
             navigate("/calendar");
         }else if(name == 'Upload History'){
             navigate("/uploadHistory");
+        }else if(name == 'LogOut'){
+            navigate("/");
         }
     }
 

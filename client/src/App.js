@@ -15,11 +15,11 @@ function App() {
     <div className='mainAppDiv'>
   
       <Routes>
-      <Route exact path='/' element={<MainPage/>} />
+      <Route exact path='/dashboard' element={<MainPage/>} />
       <Route exact path='/exercises' element={<ExercisesPage/>}/>
       <Route exact path='/calendar' element={<CalendarMainPage/>}/>
       <Route exact path='/uploadHistory' element={<UploadHistoryPage/>} />
-      <Route exact path='/loginPage' element={<LoginPage/>} />
+      <Route exact path='/' element={<LoginPage/>} />
       </Routes>
 
       </div>
