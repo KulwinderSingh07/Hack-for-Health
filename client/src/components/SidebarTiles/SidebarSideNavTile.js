@@ -25,6 +25,7 @@ const SidebarNavTile = ({iconName}) => {
         }else if(name == 'Upload History'){
             navigate("/uploadHistory");
         }else if(name == 'LogOut'){
+            localStorage.removeItem("email");
             navigate("/");
         }
     }
