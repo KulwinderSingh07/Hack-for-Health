@@ -27,7 +27,7 @@ const MainDashBoardComponent = () => {
         console.log("opens")
         setOpenExercise(true)
     }
-    const endPoints=['','getLastMonthData','getLastThreeMonthData']
+    const endPoints=['','getLastMonthData','getLastThreeMonthData','getLastYearData']
 
     const handlePatientData=async(data)=>{
         setSelectedButton(data)

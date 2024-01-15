@@ -113,4 +113,58 @@ const getLastThreeMonthData=async(req,res)=>{
     }
 }
 
-module.exports={createVitalData,getLastMonthData,getLastThreeMonthData}
+const getLastYearData=async(req,res)=>{
+    try{
+        const currentDate = new Date();
+        console.log(monthArr[currentDate.getMonth()])
+
+        const lastMonthStartDate = new Date(currentDate);
+            lastMonthStartDate.setMonth(0);
+            lastMonthStartDate.setFullYear(currentDate.getFullYear()-1);
+            lastMonthStartDate.setDate(1);
+            console.log(lastMonthStartDate)
+            
+            const lastMonthEndDate = new Date(currentDate);
+            lastMonthEndDate.setMonth(11); 
+            lastMonthEndDate.setFullYear(currentDate.getFullYear()-1); 
+            lastMonthEndDate.setDate(31);
+
+
+        console.log(lastMonthStartDate," ",lastMonthEndDate)
+        let datasets=[]
+        for (let i = 0; i < VitalList.length; i++) {
+            console.log(VitalList[i]);
+            
+            let LastMonthData=await VitalsModel.find({calculatedDateTime:{
+                $gte:lastMonthStartDate,
+                $lte:lastMonthEndDate
+            },
+            vitalName:VitalList[i]
+        })
+        // console.log(LastMonthData)
+        let data=LastMonthData.map((val)=>{
+            return {x:`${monthArr[val.calculatedDateTime.getMonth()]}`,y:val.vitalValue}
+        })
+        console.log(data)
+        let dataSetForGraph={
+            data:data,
+            label:VitalList[i],
+            color:'white',
+            borderColor: '#4c71f0',
+            backgroundColor: '#00d0c2',
+            yAxisID:'y'
+        }
+        datasets.push(dataSetForGraph)
+
+    }
+
+        res.json(datasets)
+
+
+    }catch(err){
+        res.json(err.message)
+    }
+}
+
+
+module.exports={createVitalData,getLastMonthData,getLastThreeMonthData,getLastYearData}
