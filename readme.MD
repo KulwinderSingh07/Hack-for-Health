@@ -86,8 +86,30 @@ For future scopes, these vitals' analysis over a long period of time can be usef
 
 # Installation Instructions
 
+No installation needed, everything is deployed :
+
+Python APIs : Deployed on AWS-EC2
+
+NodeJS APIs : Deployed on Render
+
+ReactJS Frontend : Deployed on Vercel
+
 # Prerequisites
+
+Sample Medical Report for Input :
+https://drive.google.com/file/d/1zSJ0vIoMgWs68raDNW2GId7UAp24slwo/view
+
+Symptoms : Symptoms are to be manually selected in the symptoms section.
 
 # Usage Guidelines
 
+Steps :
+
+1. Make an account on the website URL.
+2. Upload symptoms in symptoms section to get predicted disease.
+3. Upload pdf medical report for food and exercise suggestions.
+4. Review Vitals remotely by connecting sart devices such as apple iwatch (Currently the data in vitals is dummy for visualisation purposes).
+
 # External Requirements
+
+No external requirements
