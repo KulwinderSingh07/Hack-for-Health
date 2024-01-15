@@ -29,73 +29,56 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const ListOfSymptoms=  [
     {
-        junctionName:"Symton 1",
+        SymptomName:"sweating",
         checkBoxSelected:false
     },
     {
-        junctionName:"Symton 2",
+        SymptomName:"chest_pain",
         checkBoxSelected:false
     },
     {
-        junctionName:"Symton 2",
+        SymptomName:"breathlessness",
         checkBoxSelected:false
     }
-    ,
-    ,
-    {
-        junctionName:"Symton 2",
-        checkBoxSelected:false
-    },
-    ,
-    {
-        junctionName:"Symton 2",
-        checkBoxSelected:false
-    },
-    ,
-    {
-        junctionName:"Symton 2",
-        checkBoxSelected:false
-    },
-    ,
-    {
-        junctionName:"Symton 2",
-        checkBoxSelected:false
-    },
-    ,
-    {
-        junctionName:"Symton 2",
-        checkBoxSelected:false
-    },
-
 ]
 
 
-  const SymptomSelectorCompoent=({setSelectedArea,selectedArea})=> {
+  const SymptomSelectorCompoent=({setSelectedArea,selectedArea,setsymptomsList})=> {
     console.log(selectedArea)
     const [selectedSymptoms, setSelectedSymptoms] = useState([])
+    
     const handleOnSelect = (value) => {
         let newTemp=selectedSymptoms
         let index=newTemp.indexOf(value)
         if(index!==-1){
-            let newArr=newTemp.slice(index,1)
-            console.log(newArr)
-            setSelectedSymptoms(newArr)
+          const updatedList = selectedSymptoms.filter(item => item !== value);
+          setSelectedSymptoms(updatedList);
         }else{
-            newTemp.push(value)
-            setSelectedSymptoms(newTemp)
+          const upadetedList = [...selectedSymptoms, value];
+          setSelectedSymptoms(upadetedList);
         }
       };
 
+        function formatString(inputString) {
+    const stringWithSpaces = inputString.replace(/_/g, ' ');
+
+    // Split the string into words using spaces as separators
+    const words = stringWithSpaces.split(' ');
+
+    // Capitalize the first letter of each word
+    const capitalizedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1));
+
+    // Join the words back together with spaces
+    const formattedString = capitalizedWords.join(' ');
+
+    return formattedString;
+}
+
       const submitSymptoms=(e)=>{
-        e.preventDefault()
+        // e.preventDefault()
         console.log(selectedSymptoms)
+        setsymptomsList(selectedSymptoms)
       }
-
-
-      useEffect(()=>{
-        selectedArea[0].checkBoxSelected=true
-        setSelectedArea(selectedArea)
-      },[])
   return (
     <>
    <div className='symptonsListContainer'>
@@ -112,16 +95,17 @@ const ListOfSymptoms=  [
         {ListOfSymptoms.map((ele,index)=>{
             return(
                 <div>
-      <ListItemButton onClick={()=>{
-        handleOnSelect(ele.junctionName)
-      }}>
+      <ListItemButton>
         <FormControlLabel
-          value={ele.junctionName}
+          value={ele.SymptomName}
           control={<Checkbox 
+            onClick={()=>{
+              handleOnSelect(ele.SymptomName)
+            }}
             icon={<PanoramaFishEyeIcon style={{color:"white"}}/>}
              checkedIcon={<CircleIcon />}
           />}
-          label={ele.junctionName}
+          label={formatString(ele.SymptomName)}
           labelPlacement="End"
         />
       </ListItemButton>

@@ -155,7 +155,6 @@ const getLastYearData=async(req,res)=>{
             yAxisID:'y'
         }
         datasets.push(dataSetForGraph)
-
     }
 
         res.json(datasets)

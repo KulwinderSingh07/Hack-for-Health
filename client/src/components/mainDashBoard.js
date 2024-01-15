@@ -6,7 +6,7 @@ import ProfileDemo from "../assets/images/profilePickDemo.jpg"
 import LineGraphCompoent from "./mainGraphCompoent";
 import ControlsComponent from "./controllerCompoent";
 import BottomRightCompoent from "./bottomRightCompoent";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PopUpCompoent from "./popUpComponent";
 import SymptomSelectorCompoent from "./symptomsDropDownCompoent";
 import SpeedIcon from '@mui/icons-material/Speed';
@@ -19,8 +19,54 @@ const MainDashBoardComponent = () => {
 
     const [graphData, setGraphData] = useState()
     const [donutData, setDonutData] = useState()
-
     const [openDiet, setOpenDiet] = useState(false)
+
+    const [symptomsList, setsymptomsList] = useState([])
+    const [symptomsPredictionHistory, setSymptomsPredictionHistory] = useState([])
+
+    const PredictingDiseaseBasedOnSymptoms=async()=>{
+        const symptomsData={
+            symptoms:symptomsList
+        }
+
+        console.log(symptomsList)
+        if(symptomsList.length!=0){
+
+            const PredictedData=await axios.post("http://localhost:4000/",symptomsData)
+            console.log(PredictedData.data)
+            
+            const predictionHistoryDocumentDat={
+                predictedDisease:PredictedData.data.disease_prediction,
+                userEmail:'laddi',
+                Symptoms:symptomsList
+            }
+
+            const createdPredictionHistoryDocument=await axios.post("http://localhost:3001/symptomsPrediction/create",predictionHistoryDocumentDat)
+            console.log(createdPredictionHistoryDocument)
+
+            if(createdPredictionHistoryDocument.status==200){
+                console.log(createdPredictionHistoryDocument.data)
+                const credential={
+                    email:"laddi"
+                }
+                const fetChedPredictionHistory=await axios.post("http://localhost:3001/symptomsPrediction/getPredictionHistory",credential)
+                console.log(fetChedPredictionHistory.data)
+                let sortedData=fetChedPredictionHistory.data.sort((a, b) => b.predictionTime - a.predictionTime);
+                setSymptomsPredictionHistory(fetChedPredictionHistory.data)
+                setsymptomsList([])
+            }
+        }
+    }
+    
+    const fetchPredictionHistory=async()=>{
+        const credential={
+            email:"laddi"
+        }
+        const fetchedHistory=await axios.post("http://localhost:3001/symptomsPrediction/getPredictionHistory",credential)
+        fetchedHistory.data.sort((a, b) => a.predictionTime - b.predictionTime);
+        setSymptomsPredictionHistory(fetchedHistory.data)
+    }
+
     const data="Hello ji"
 
     const handleExerClickOpen=()=>{
@@ -86,6 +132,14 @@ const MainDashBoardComponent = () => {
     const handleDietClickOpen=()=>{
         setOpenDiet(true)
     }
+
+    useEffect(()=>{
+        fetchPredictionHistory()
+    },[])
+
+    useEffect(()=>{
+        PredictingDiseaseBasedOnSymptoms()
+    },[symptomsList])
     
     return (
         <div className="DashBoard">
@@ -142,13 +196,13 @@ const MainDashBoardComponent = () => {
                         >LifeTime</button>
                     </div>
                 <div className="symptomsWrapper">
-                    <SymptomSelectorCompoent selectedArea={selectedArea} setSelectedArea={setSelectedArea}/>
+                    <SymptomSelectorCompoent selectedArea={selectedArea} setSelectedArea={setSelectedArea} setsymptomsList={setsymptomsList}/>
                 </div>
                 </div>  
             </div>
             <div className="BottomGraphs">
                 <ControlsComponent donutData={donutData}/>
-                <BottomRightCompoent />
+                <BottomRightCompoent symptomsPredictionHistory={symptomsPredictionHistory}/>
             </div>
         </div>
         </div> 

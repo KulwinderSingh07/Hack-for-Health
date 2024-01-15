@@ -10,7 +10,9 @@ app.use(express.json());
 app.use(cors());
 
 const VitalRoutes=require("./routes/vitalDataRoute")
+const SymptomsHistory=require("./routes/predictionSymptomsHistory")
 app.use("/vital",VitalRoutes)
+app.use("/symptomsPrediction",SymptomsHistory)
 
 const userLoginRoutes = require('./routes/userLoginRoute');
 app.use("/login",userLoginRoutes);
