@@ -29,6 +29,7 @@ const LoginPage = () => {
       const res = await axios.post('http://localhost:3001/login/loginUser',{email,password});
       console.log(res);
       if(res.data.exists == true){
+        localStorage.setItem("email",email);
         navigate('/dashboard');//navigate to main dashboard
       }
     }else{
@@ -41,9 +42,11 @@ const LoginPage = () => {
       const res = await axios.post('http://localhost:3001/login/signUpUser',{username,email,password});
       console.log(res);
       if(res.data.exists == false){
+        localStorage.setItem("email",email);
+        localStorage.setItem("username",username);
         navigate('/dashboard');//navigate to main dashboard
       }else{
-        //toastify-message
+        return;
       }
 
     }
