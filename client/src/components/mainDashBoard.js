@@ -23,6 +23,8 @@ const MainDashBoardComponent = () => {
     const [openDiet, setOpenDiet] = useState(false)
 
     const [symptomsList, setsymptomsList] = useState([])
+    
+
     const [symptomsPredictionHistory, setSymptomsPredictionHistory] = useState([])
     const [pdfReportData, setPdfReportData] = useState({
         fileName:"",

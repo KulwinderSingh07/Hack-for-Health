@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Sidebar from './Sidebar';
 
 //MATERIAL UI IMPORTS
@@ -15,11 +15,12 @@ import { Typography } from "@mui/material";
 //CSS
 import '../CSS/UploadHistoryPage.css';
 import HistoryPopUpCompoent from './popUpForHistory';
+import axios from 'axios';
 
 
 const UploadHistoryPage = () => {
   const [openPopUp, setOpenPopUp] = useState(-1)
-  const data="hello ji"
+  const [reportHistoryPDFList, setReportHistoryPDFList] = useState([])
 
   const ListData=[
     {
@@ -59,6 +60,14 @@ const UploadHistoryPage = () => {
       }
   ]
 
+  function getCurrentTimeString(date) {
+    const currentDate = new Date(date);
+    const hours = currentDate.getHours().toString().padStart(2, '0');
+    const minutes = currentDate.getMinutes().toString().padStart(2, '0');
+    const seconds = currentDate.getSeconds().toString().padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
+  }
+
   const handleClick = (index) => {
     console.log(index)
     if(index==openPopUp){
@@ -68,6 +77,18 @@ const UploadHistoryPage = () => {
     }
   };
 
+  const FetchHistory=async()=>{
+    const credentials={
+      email:"laddi"
+    }
+    const historyData=await axios.post("http://localhost:3001/pdfHistory/fetchPdfHistory",credentials)
+    console.log(historyData.data)
+    setReportHistoryPDFList(historyData.data)
+  }
+
+  useEffect(()=>{
+    FetchHistory()
+  },[])
 
   return (
     <>
@@ -87,13 +108,15 @@ const UploadHistoryPage = () => {
         </div>
 
         <div className='ReportHistoryDrop'>
-    <List
-    className='listWrapper'
-      component="nav"
-      aria-labelledby="nested-list-subheader"
-    >
-        {ListData.map((ele,index)=>{
-            return(
+   {
+
+     <List
+     className='listWrapper'
+     component="nav"
+     aria-labelledby="nested-list-subheader"
+     >
+        {reportHistoryPDFList.map((ele,index)=>{
+          return(
                 <div>
       <ListItemButton
       className='listItem'
@@ -105,10 +128,10 @@ const UploadHistoryPage = () => {
           <FileDownloadIcon style={{color:"white"}} fontSize='medium'/>
         </IconButton> */}
           {/* </div> */}
-        <Typography  className='listItemObject' sx={{fontSize:"large",fontWeight:"bold",color:'white'}}>{ele.val}</Typography>
-        <Typography className='listItemObject'  sx={{fontSize:"large",fontWeight:"bold",color:'white'}}>{ele.date}</Typography>
+        <Typography  className='listItemObject' sx={{fontSize:"large",fontWeight:"bold",color:'white'}}>{ele.fileName}</Typography>
+        <Typography className='listItemObject'  sx={{fontSize:"medium",fontWeight:"bold",color:'white'}}>{new Date(ele.creationDate).toDateString()}/{getCurrentTimeString(ele.creationDate)}</Typography>
         <div className='popUpOutput listItemObject'>
-          <Typography  sx={{fontSize:"large",fontWeight:"bold" ,color:'white'}}>{ele.output}</Typography>      
+          {/* <Typography  sx={{fontSize:'small',fontWeight:"bold" ,color:'white'}}>{ele.output}</Typography>       */}
         <IconButton
         onClick={()=>{
           handleClick(index)
@@ -119,11 +142,12 @@ const UploadHistoryPage = () => {
         </div>
         </div>
       </ListItemButton>
-      <HistoryPopUpCompoent data={data} open={openPopUp} index={index} setOpenPopUp={setOpenPopUp}/>
+      <HistoryPopUpCompoent data={"23"} open={openPopUp} index={index} setOpenPopUp={setOpenPopUp}/>
                 </div>
             )
-        })}
+          })}
     </List>
+}
   </div>
     
     </div>

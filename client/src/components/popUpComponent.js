@@ -23,6 +23,18 @@ const PopUpCompoent = ({open,setOpen,title,pdfReportData}) => {
     const handleClose = () => {
       setOpen(false);
     };
+
+    function getFoodString(arr){
+      let val="[ "
+      for(let i=0;i<arr.length;i++){
+        if(i<arr.length-1){
+          val=val+arr[i]+" , "
+        }else{
+          val=val+arr[i]+" ] "
+        }
+      }
+      return val
+    }
     console.log(pdfReportData)
     return ( 
         <Fragment>
@@ -56,9 +68,14 @@ const PopUpCompoent = ({open,setOpen,title,pdfReportData}) => {
             </Typography>
             {pdfReportData!=undefined?pdfReportData.FoodItems.map((val)=>{
               return (
+                <>
             <Typography gutterBottom>
              Disease Name : {val?val.disease:""}
             </Typography>
+            <Typography>
+              Food Items: {val?getFoodString(val.foodlist):""}
+            </Typography>
+                </>
               )
             })
           :
