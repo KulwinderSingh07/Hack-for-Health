@@ -178,11 +178,11 @@ const MainDashBoardComponent = () => {
                 <div className="MainGraphContainer">
                 <LineGraphCompoent graphData={graphData}/>
                 <div className="graphControllButtons">
-                        <button style={{backgroundColor:selectedButton==0?'#222b5d':'#3c3d43'}}
+                        {/* <button style={{backgroundColor:selectedButton==0?'#222b5d':'#3c3d43'}}
                         onClick={()=>{
                             handlePatientData(0)
                         }}
-                        >LastWeek</button>
+                        >LastWeek</button> */}
                         <button style={{backgroundColor:selectedButton==1?'#222b5d':'#3c3d43'}}
                         onClick={()=>{
                             handlePatientData(1)
@@ -198,11 +198,11 @@ const MainDashBoardComponent = () => {
                             handlePatientData(3)
                         }}
                         >Yearly</button>
-                        <button style={{backgroundColor:selectedButton==4?'#222b5d':'#3c3d43'}}
+                        {/* <button style={{backgroundColor:selectedButton==4?'#222b5d':'#3c3d43'}}
                         onClick={()=>{
                             handlePatientData(4)
                         }}
-                        >LifeTime</button>
+                        >LifeTime</button> */}
                     </div>
                 <div className="symptomsWrapper">
                     <SymptomSelectorCompoent selectedArea={selectedArea} setSelectedArea={setSelectedArea} setsymptomsList={setsymptomsList}/>
