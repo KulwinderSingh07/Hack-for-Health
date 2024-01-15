@@ -1,4 +1,5 @@
 import React from 'react'
+import Sidebar from './Sidebar';
 
 //MATERIAL UI IMPORTS
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
@@ -70,6 +71,7 @@ const UploadHistoryPage = () => {
 
   return (
     <>
+        <Sidebar/>
     <div className='uploadHistoryPageMainDiv'>
         {/*Imported Header*/}
         <div className='exercisesSuggestionHeader'>
