@@ -6,13 +6,17 @@ import ExercisesPage from './ExercisesPage';
 
 const MainPage = () => {
   return (
-    <div>
+    <>
+        <Sidebar/>
+        <div>
 
         {/*Conditional Rendering between components*/}
         <div className='renderSectionDiv'>
             <Dashboard/>
         </div>
     </div>
+    </>
+    
   )
 }
 

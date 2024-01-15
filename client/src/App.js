@@ -5,6 +5,7 @@ import ExercisesPage from './components/ExercisesPage';
 import Sidebar from './components/Sidebar';
 import CalendarMainPage from './components/CalendarMainPage';
 import UploadHistoryPage from './components/UploadHistoryPage';
+import LoginPage from './components/LoginPage';
 // import Sidebar from "./components/Sidebar";
 
 function App() {
@@ -13,12 +14,12 @@ function App() {
 
     <div className='mainAppDiv'>
   
-        <Sidebar/>
       <Routes>
       <Route exact path='/' element={<MainPage/>} />
       <Route exact path='/exercises' element={<ExercisesPage/>}/>
       <Route exact path='/calendar' element={<CalendarMainPage/>}/>
       <Route exact path='/uploadHistory' element={<UploadHistoryPage/>} />
+      <Route exact path='/loginPage' element={<LoginPage/>} />
       </Routes>
 
       </div>

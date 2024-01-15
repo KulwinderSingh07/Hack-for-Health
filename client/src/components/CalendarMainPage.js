@@ -6,6 +6,7 @@ import {FormControl} from '@mui/material';
 import {InputLabel} from '@mui/material';
 import {MenuItem} from '@mui/material';
 import { useState } from 'react';
+import Sidebar from './Sidebar';
 
 //CSS
 import '../CSS/CalendarMainPage.css';
@@ -30,7 +31,9 @@ const CalendarMainPage = () => {
   };
 
   return (
-    <div className='calenderOutermostDiv'>
+    <>
+        <Sidebar/>
+        <div className='calenderOutermostDiv'>
       <div className='exercisesSuggestionHeader'>
           <EventAvailableIcon sx={{fontSize:'2vw',marginRight:'15px',marginTop:'-0.2vw'}}/><h3 className='exercisesHeaderText'>CALENDAR TRACKING</h3>
           </div>
@@ -128,6 +131,8 @@ const CalendarMainPage = () => {
 
       </div>
     </div>
+    </>
+    
   )
 }
 

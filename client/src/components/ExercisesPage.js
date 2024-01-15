@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import Sidebar from './Sidebar';
 
 //CSS Imports
 import '../CSS/ExercisesPage.css';
@@ -37,7 +38,9 @@ const ExercisesPage = () => {
   },[])
 
   return (
-    <div className='exerisesMainDiv'>
+    <>
+        <Sidebar/>
+        <div className='exerisesMainDiv'>
         <MyExercises/>
 
         <Divider sx={{backgroundColor:'white'}} orientation='vertical' flexItem/>
@@ -45,6 +48,8 @@ const ExercisesPage = () => {
         {/*Search Exercises */}
         <SearchExercises/>
         </div>
+    </>
+    
   )
 }
 
