@@ -32,7 +32,7 @@ const MainDashBoardComponent = () => {
         console.log(symptomsList)
         if(symptomsList.length!=0){
 
-            const PredictedData=await axios.post("http://localhost:4000/",symptomsData)
+            const PredictedData=await axios.post("http://13.127.33.46:4000/",symptomsData)
             console.log(PredictedData.data)
             
             const predictionHistoryDocumentDat={

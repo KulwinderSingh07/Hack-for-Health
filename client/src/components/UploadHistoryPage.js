@@ -79,7 +79,7 @@ const UploadHistoryPage = () => {
         </div>
 
         <div className='reportHistoryHeading'>
-          <div>Download</div>
+          {/* <div>Download</div> */}
           <div>PDF Name</div>
           <div>Date/Time</div>
           {/* <div>Download Button</div> */}
@@ -100,11 +100,11 @@ const UploadHistoryPage = () => {
       sx={{marginBottom:"1vh", borderRadius:"1rem",background:"CE16EC",background:"linear-gradient(225deg, #0067ff, #6e95f5)",":hover":{backgroundColor:"#4156ca"}}}
       >
         <div className='listItemWrapper'>
-          <div className='listItemObject'>
-        <IconButton className='iconForDownload'>
+          {/* <div className='listItemObject'> */}
+        {/* <IconButton className='iconForDownload'>
           <FileDownloadIcon style={{color:"white"}} fontSize='medium'/>
-        </IconButton>
-          </div>
+        </IconButton> */}
+          {/* </div> */}
         <Typography  className='listItemObject' sx={{fontSize:"large",fontWeight:"bold",color:'white'}}>{ele.val}</Typography>
         <Typography className='listItemObject'  sx={{fontSize:"large",fontWeight:"bold",color:'white'}}>{ele.date}</Typography>
         <div className='popUpOutput listItemObject'>

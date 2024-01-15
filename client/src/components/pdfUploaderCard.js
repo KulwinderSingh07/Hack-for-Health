@@ -15,7 +15,7 @@ const PdfUploaderCardComponent = () => {
         const formData= new FormData()
         formData.append('pdf_file',file);
         console.log(formData)
-        const resp=await axios.post("http://localhost:4001/extract",formData)
+        const resp=await axios.post("http://3.109.238.31:4001/extract",formData)
         console.log(resp.data)
     }
     return ( 
