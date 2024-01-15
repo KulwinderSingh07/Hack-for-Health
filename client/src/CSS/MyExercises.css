@@ -177,3 +177,19 @@ input::placeholder{
     font-size: 1vw;
     padding-left: 1vw;
 }
+
+.enumBodyPartsStyle{
+    display: flex;
+    justify-content: center;
+    /* border-style: solid; */
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.enumBodyPartsStyle h2{
+    border-radius: 10px;
+    background-color: #00a142;
+    color: white;
+    padding: 5px;
+    margin: 10px;
+}
