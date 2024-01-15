@@ -100,18 +100,17 @@ const LineGraphCompoent = ({graphData}) => {
   )
 
   const [dataToDispaly, setDataToDispaly] = useState(
-    // {
-    //   labels,
-    //   datasets: [
-    //     {
-    //       label: 'Dataset 2',
-    //       data:[1000,800,-200,-900,-600,6000,400],
-    //       borderColor: '#4c71f0',
-    //       backgroundColor: '#00d0c2',
-    //       yAxisID: 'y1',
-    //     },
-    //   ],
-    // }
+    {
+      datasets: [
+        {
+          label: 'None',
+          data:[],
+          borderColor: '#4c71f0',
+          backgroundColor: '#00d0c2',
+          yAxisID: 'y1',
+        },
+      ],
+    }
   )
 
   // const handleGraphDataChanges=(toggeledGraphData)=>{

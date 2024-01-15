@@ -13,8 +13,6 @@ const createVitalData=async(req,res)=>{
 
 const getLastMonthData= async (req,res)=>{
     try{
-        const currentMonth=new Date().getMonth()
-        const currentYear=new Date().getFullYear()
         const currentDate = new Date();
 
         const lastMonthStartDate = new Date(currentDate);
@@ -64,4 +62,55 @@ const getLastMonthData= async (req,res)=>{
     }
 }
 
-module.exports={createVitalData,getLastMonthData}
+const monthArr=['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL','AUG','SEP','OCT','NOV','DEC']
+
+const getLastThreeMonthData=async(req,res)=>{
+    try{
+        const currentDate = new Date();
+        console.log(monthArr[currentDate.getMonth()])
+
+        const lastMonthStartDate = new Date(currentDate);
+            lastMonthStartDate.setMonth(currentDate.getMonth() - 3);
+        lastMonthStartDate.setDate(1);
+        console.log(lastMonthStartDate)
+
+        const lastMonthEndDate = new Date(currentDate);
+        lastMonthEndDate.setDate(0); 
+
+        console.log(lastMonthStartDate," ",lastMonthEndDate)
+        let datasets=[]
+        for (let i = 0; i < VitalList.length; i++) {
+            console.log(VitalList[i]);
+            
+            let LastMonthData=await VitalsModel.find({calculatedDateTime:{
+                $gte:lastMonthStartDate,
+                $lte:lastMonthEndDate
+            },
+            vitalName:VitalList[i]
+        })
+        // console.log(LastMonthData)
+        let data=LastMonthData.map((val)=>{
+            return {x:`${monthArr[val.calculatedDateTime.getMonth()]}`,y:val.vitalValue}
+        })
+        console.log(data)
+        let dataSetForGraph={
+            data:data,
+            label:VitalList[i],
+            color:'white',
+            borderColor: '#4c71f0',
+            backgroundColor: '#00d0c2',
+            yAxisID:'y'
+        }
+        datasets.push(dataSetForGraph)
+
+    }
+
+        res.json(datasets)
+
+
+    }catch(err){
+        res.json(err.message)
+    }
+}
+
+module.exports={createVitalData,getLastMonthData,getLastThreeMonthData}
