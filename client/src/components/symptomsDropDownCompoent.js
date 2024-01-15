@@ -29,16 +29,60 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const ListOfSymptoms=  [
     {
-        SymptomName:"sweating",
-        checkBoxSelected:false
+      SymptomName:"itching",
+      checkBoxSelected:false
     },
     {
-        SymptomName:"chest_pain",
-        checkBoxSelected:false
+      SymptomName:"skin_rash",
+      checkBoxSelected:false
     },
     {
-        SymptomName:"breathlessness",
-        checkBoxSelected:false
+      SymptomName:"nodal_skin_eruptions",
+      checkBoxSelected:false
+    },
+    {
+      SymptomName:"continuous_sneezing",
+      checkBoxSelected:false
+    },
+    {
+      SymptomName:"shivering",
+      checkBoxSelected:false
+    },
+    {
+      SymptomName:"chills",
+      checkBoxSelected:false
+    },
+    {
+      SymptomName:"joint_pain",
+      checkBoxSelected:false
+    },
+    {
+      SymptomName:"stomach_pain",
+      checkBoxSelected:false
+    },
+    {
+      SymptomName:"acidity",
+      checkBoxSelected:false
+    },
+    {
+      SymptomName:"ulcers_on_tongue",
+      checkBoxSelected:false
+    },
+    {
+      SymptomName:"muscle_wasting",
+      checkBoxSelected:false
+    },
+    {
+      SymptomName:"vomiting",
+      checkBoxSelected:false
+    },
+    {
+      SymptomName:"burning_micturition",
+      checkBoxSelected:false
+    },
+    {
+      SymptomName:"itching",
+      checkBoxSelected:false
     }
 ]
 
