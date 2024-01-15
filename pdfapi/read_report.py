@@ -3,6 +3,8 @@ import pdfplumber
 import re
 from flask import Flask, request, jsonify
 import pandas as pd
+from flask_cors import CORS, cross_origin
+
 
 def extract_text(pdf_file):
   with pdfplumber.open(pdf_file) as pdf:
@@ -41,12 +43,19 @@ def extract_details(text):
         if result > (lower_limit+upper_limit)/2:
           temp["disease"]="diabetes"
           df=pd.read_csv("exercises.csv")
+          df2=pd.read_csv("food_items.csv")
           exercises=[str(i) for i in list(df[temp["disease"]].values)]
           for j in range(len(exercises)):
             if exercises[j]=='nan':
               exercises=exercises[:j]
               break
           temp["body_parts"]=exercises
+          food_items=[str(i) for i in list(df2[temp["disease"]].values)]
+          for j in range(len(food_items)):
+            if food_items[j]=='nan':
+              food_items=food_items[:j]
+              break
+          temp["food_items"]=food_items
 
       test_results.append(temp)
 
@@ -57,6 +66,8 @@ def extract_details(text):
 
 
 app = Flask(__name__)
+CORS(app)
+
 
 @app.route('/')
 def index():
@@ -65,7 +76,6 @@ def index():
 @app.route('/extract', methods=['POST'])
 def extract():
   if request.method == 'POST':
-    print(request.files)
     pdf_file = request.files['pdf_file']
     text = extract_text(pdf_file)
     details = extract_details(text)
