@@ -1,3 +1,160 @@
 .loginOutermostDiv{
+    width: 100vw;
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #34448b;
+    font-family: 'Raleway', sans-serif;
+    flex-direction: column;
+}
+
+.innerMainLoginDiv{
+    /* border-style: solid; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #c6dbfa;
+    border-radius: 20px;
+}
+
+.doctorLoginPhoto{
+    height: 30vw;
+    margin: 1.5vw;
+    border-radius: 20px;
+}
+
+.inputsDivLogin{
+    display: flex;
+    flex-direction: column;
+    margin: 3vw;
+    margin-right: 3.5vw;
+}
+
+.innerMainLoginDiv input{
+    margin: 5px;
+    border-radius: 20px;
+    font-size: 1vw;
+}
+
+.innerMainLoginDiv input::placeholder{
+    color: black;
+}
+
+
+input {
+    border: none;
+    box-shadow: none;
+    outline: none;
+    color: var(--primary_color);
+    font-size: 16px;
+    flex-grow: 1;
+    padding: 1.2rem 0;
+    background-color: rgb(248, 248, 255);
+}
+
+input::placeholder {
+    font-weight: lighter;
+    color: var(--primary_lite);
+}
+
+.input_wrapp {
+    display: flex;
+    width: 100%;
+}
+
+.input_container:has(input:focus) {
+    border: 1px solid var(--sec_color);
+}
+
+
+.input_container {
+    border: 1px solid var(--primary_color);
+    display: flex;
+    align-items: center;
+    background-color: rgb(248, 248, 255);
+    margin: 0.5rem 0;
+    width: 100%;
+    padding: 0 1rem;
+    border-radius: 20px;
+    margin: 20px;
+}
+
+.input_container .input_icon {
+    font-size: 20px;
+    color: var(--primary_color);
+    height: 20px;
+    padding-right: 5px;
+}
+
+
+.input_wrapper {
+    padding: 1rem 0;
+}
+
+.loginButtonSubmitDiv{
+    display: flex;
+    justify-content: center;
+    /* border-style: solid; */
+    font-size: 1.5vw;
+    margin-right: 1.2vw;
+    margin-left: 1.2vw;
+    border-radius: 20px;
+    padding-bottom: 0.5vw;
+    padding-top: 0.5vw;
+    background-image: linear-gradient(to top right,#0067ff,#3988ff);
+    color:white;
+    transition: all 0.5 ease-in-out;
+    margin-top: 1vw;
+}
+
+.loginButtonSubmitDiv:hover{
+    cursor:pointer;
+    transform: scale(1.05);
+}
+
+.typeWritterStyle{
+    font-size:1vw;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.loginHeaderDiv{
+    margin:20px;
+    margin-top: -50px;
+    font-size: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-image: linear-gradient(to top right,#0067ff,#3988ff);
+    padding: 1vw;
+    color: white;
+}
+
+.loginSignUpToggleDiv{
+    display: flex;
+    justify-content: space-between;
+    background-image: linear-gradient(to top right,#0067ff,#3988ff);
+    border-radius: 20px;
+    margin-bottom: 1vw;
+    margin-left: 1.5vw;
+    margin-right: 1.5vw;
+    font-size: 0.7vw;
+    padding: 5px;
+}
+
+.loginSignUpToggleDiv h1{
+    margin: 10px;
+    /* border-style: solid; */
+    padding: 5px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.loginSignUpToggleDiv h1:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    color: blue;
 }
