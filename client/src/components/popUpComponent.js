@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -23,6 +23,10 @@ const PopUpCompoent = ({open,setOpen,title,pdfReportData,bodyPartsData}) => {
     const handleClose = () => {
       setOpen(false);
     };
+
+    useEffect(()=>{
+      console.log('Body Parts inside popup-comPONENT=>',bodyPartsData)
+    },[bodyPartsData])
 
     function getFoodString(arr){
       let val="[ "
@@ -80,16 +84,15 @@ const PopUpCompoent = ({open,setOpen,title,pdfReportData,bodyPartsData}) => {
             })
           :
           title == "Suggested Target Body Parts" && bodyPartsData!=undefined ? bodyPartsData.map((val)=>{
-            return (
-              <>
-              <Typography>
-                File Name : {pdfReportData?pdfReportData.fileName:""}
-              </Typography>
-              <Typography>
-               BodyPart: {val}
-            </Typography>
-            </>
-            )
+            if(val.body_parts){
+              return (
+                <Typography>
+                  Body Part : {`[ ${val.body_parts} ]`}
+                </Typography>
+              );
+            }else{
+              return (<></>);
+            }
           }):<></>
           }
             <Typography gutterBottom>

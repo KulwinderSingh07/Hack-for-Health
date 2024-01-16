@@ -28,6 +28,10 @@ const MainDashBoardComponent = () => {
 
     const [symptomsList, setsymptomsList] = useState([])
     const email = location.state?.email || 'simar';
+
+    // if(location.state){
+    //     console.log('Location State -> ',location.state);
+    // }
     
 
     const [symptomsPredictionHistory, setSymptomsPredictionHistory] = useState([])
@@ -171,7 +175,7 @@ const MainDashBoardComponent = () => {
             <div className="OperationCardsWrapper">
                 <PdfUploaderCardComponent setPdfReportData={setPdfReportData} setBodyPartsData={setBodyPartsData}/>
                 <ExerciseCardComponent  handleExerClickOpen={handleExerClickOpen} bodyPartsData={bodyPartsData} pdfReportData={pdfReportData} title={"Suggested Target Body Parts"}/>
-                <PopUpCompoent open={openExercise} setOpen={setOpenExercise} pdfReportData={pdfReportData} title={"Suggested Target Body Parts"}/>
+                <PopUpCompoent open={openExercise} setOpen={setOpenExercise} bodyPartsData={bodyPartsData} pdfReportData={pdfReportData} title={"Suggested Target Body Parts"}/>
                 <DietCardComponent handleDietClickOpen={handleDietClickOpen}/>
                 <PopUpCompoent open={openDiet} setOpen={setOpenDiet} pdfReportData={pdfReportData} title={"Recommended Food Items"}/>
             </div>
