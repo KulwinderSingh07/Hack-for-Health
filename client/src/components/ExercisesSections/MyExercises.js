@@ -32,7 +32,7 @@ const MyExercises = ({myExercises}) => {
 
 
   const fetchGymData = async()=>{
-      const res = await axios.post('http://localhost:3001/exercise/fetchMyExercises',{email});
+      const res = await axios.post('https://gfg-backend.onrender.com/exercise/fetchMyExercises',{email});
       console.log(res.data.data);
 
       if(res.data.data == undefined){
@@ -44,28 +44,28 @@ const MyExercises = ({myExercises}) => {
   }
 
   const markExerciseCompleted = async(exerciseName) => {
-    const res = await axios.post('http://localhost:3001/exercise/markComplete',{exerciseName,email});
+    const res = await axios.post('https://gfg-backend.onrender.com/exercise/markComplete',{exerciseName,email});
     console.log(res);
     fetchGymData();
     checkIfAllComplete();
   }
 
   const markExerciseNotCompleted = async(exerciseName) => {
-    const res = await axios.post('http://localhost:3001/exercise/markNotComplete',{exerciseName,email});
+    const res = await axios.post('https://gfg-backend.onrender.com/exercise/markNotComplete',{exerciseName,email});
     console.log(res);
     fetchGymData();
     checkIfAllComplete();
   }
 
   const removeFromList = async(exerciseName) => {
-    const res = await axios.post('http://localhost:3001/exercise/removeFromList',{exerciseName,email});
+    const res = await axios.post('https://gfg-backend.onrender.com/exercise/removeFromList',{exerciseName,email});
     console.log(res);
     fetchGymData();
     checkIfAllComplete();
   }
 
   const checkIfAllComplete = async() =>{
-    const res = await axios.post('http://localhost:3001/exercise/checkIfAllComplete',{email});
+    const res = await axios.post('https://gfg-backend.onrender.com/exercise/checkIfAllComplete',{email});
     console.log(res);
     setAllCompleted(res.data.done);
 
@@ -75,11 +75,11 @@ const MyExercises = ({myExercises}) => {
       let month = objectDate.getMonth();
       let year = objectDate.getFullYear();
     if(res.data.done == true){
-      const res = await axios.post('http://localhost:3001/calendar/addCalendarDate',{email,day,month:month+1,year});
+      const res = await axios.post('https://gfg-backend.onrender.com/calendar/addCalendarDate',{email,day,month:month+1,year});
       console.log(res);
       setCompletionMsg("Congratulations, all exercises completed for the day");
     }else{
-      const res = await axios.post('http://localhost:3001/calendar/deleteCalendarDate',{email,day,month:month+1,year});
+      const res = await axios.post('https://gfg-backend.onrender.com/calendar/deleteCalendarDate',{email,day,month:month+1,year});
       console.log(res);
       setCompletionMsg("");
     }

@@ -26,7 +26,7 @@ const LoginPage = () => {
         return;
       }
 
-      const res = await axios.post('http://localhost:3001/login/loginUser',{email,password});
+      const res = await axios.post('https://gfg-backend.onrender.com/login/loginUser',{email,password});
       console.log(res);
       if(res.data.exists == true){
         localStorage.setItem("email",email);
@@ -39,7 +39,7 @@ const LoginPage = () => {
         return;
       }
 
-      const res = await axios.post('http://localhost:3001/login/signUpUser',{username,email,password});
+      const res = await axios.post('https://gfg-backend.onrender.com/login/signUpUser',{username,email,password});
       console.log(res);
       if(res.data.exists == false){
         localStorage.setItem("email",email);

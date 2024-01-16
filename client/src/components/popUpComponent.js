@@ -26,7 +26,7 @@ const PopUpCompoent = ({open,setOpen,title,pdfReportData,bodyPartsData}) => {
     };
 
     const setBodyPartsInDB = async(email) => {
-      const res = await axios.post('http://localhost:3001/exercise/addSuggestedExercisesFromPdf',{email,bodyPartsData});
+      const res = await axios.post('https://gfg-backend.onrender.com/exercise/addSuggestedExercisesFromPdf',{email,bodyPartsData});
       console.log('Response on saving BodyParts In DB :',res);
       return;
     }

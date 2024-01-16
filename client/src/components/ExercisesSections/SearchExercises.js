@@ -21,7 +21,7 @@ const SearchExercises = ({setMyExercises}) => {
 
     const saveToMyList = async(exercise)=>{
       console.log('add call')
-      const res = await axios.post('http://localhost:3001/exercise/saveToMyList',{email,exercise});
+      const res = await axios.post('https://gfg-backend.onrender.com/exercise/saveToMyList',{email,exercise});
       console.log(res.data);
 
       setMyExercises(res);

@@ -16,7 +16,7 @@ const CalendarMainPage = () => {
   const email = localStorage.getItem("email");
 
   const apiFetch = async() =>{
-      const res = await axios.post('http://localhost:3001/calendar/fetchCalendarDates',{email:email});
+      const res = await axios.post('https://gfg-backend.onrender.com/calendar/fetchCalendarDates',{email:email});
       console.log(res);
       if(res.data.msg == "user currently has no dates"){
         return;
