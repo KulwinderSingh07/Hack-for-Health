@@ -1,8 +1,5 @@
 const mongoose=require("mongoose")
 const exerciseSchema=mongoose.Schema({
-    username:{
-        type:String
-    },
     email:{
         type:String
     },

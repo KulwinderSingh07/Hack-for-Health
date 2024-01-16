@@ -27,7 +27,7 @@ const MainDashBoardComponent = () => {
     const [openDiet, setOpenDiet] = useState(false)
 
     const [symptomsList, setsymptomsList] = useState([])
-    const email = location.state?.email || 'simar';
+    const email = location.state?.email || localStorage.getItem("email");
 
     // if(location.state){
     //     console.log('Location State -> ',location.state);
@@ -68,9 +68,8 @@ const MainDashBoardComponent = () => {
                     email:email
                 }
                 const fetChedPredictionHistory=await axios.post("http://localhost:3001/symptomsPrediction/getPredictionHistory",credential)
-                console.log(fetChedPredictionHistory.data)
-                let sortedData=fetChedPredictionHistory.data.sort((a, b) => b.predictionTime - a.predictionTime);
-                setSymptomsPredictionHistory(fetChedPredictionHistory.data)
+                let sortedData=fetChedPredictionHistory.data.sort((a, b) => new Date(b.predictionTime) - new Date(a.predictionTime));
+                setSymptomsPredictionHistory(sortedData)
                 setsymptomsList([])
             }
         }
@@ -81,8 +80,9 @@ const MainDashBoardComponent = () => {
             email:email
         }
         const fetchedHistory=await axios.post("http://localhost:3001/symptomsPrediction/getPredictionHistory",credential)
-        fetchedHistory.data.sort((a, b) => a.predictionTime - b.predictionTime);
-        setSymptomsPredictionHistory(fetchedHistory.data)
+        // fetchedHistory.data.sort((a, b) => a.predictionTime - b.predictionTime);
+        let sortedData=fetchedHistory.data.sort((a, b) => new Date(b.predictionTime) - new Date(a.predictionTime));
+        setSymptomsPredictionHistory(sortedData);
     }
 
     const data="Hello ji"
