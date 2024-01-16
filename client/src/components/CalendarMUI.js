@@ -7,21 +7,19 @@ import axios from 'axios';
 import '../CSS/CalendarMUI.css';
 
 const YourComponent = () => {
-    const [selectedDate,setSelectedDate] = useState(new Date());
-
+    const email = localStorage.getItem("email");
     console.log(new DateObject().set({day:5}));
 
-    const [values, setValues] = useState([
-        [new DateObject().set({ day: 1 }), new DateObject().set({ day: 1 })],
-        [new DateObject().set({ day: 6 }), new DateObject().set({ day: 6 })],
-        [new DateObject().set({ day: 23 }), new DateObject().set({ day: 27 })],
-        [new DateObject().set({year:2023,month:12,day:2}), new DateObject().set({year:2023,month:12,day:2})]
-      ]);
+    const [values, setValues] = useState([]);
 
 
     const fetchFromApi = async()=>{
-      const res = await axios.post('http://localhost:3001/calendar/fetchCalendarDates',{email:'simar'});
+      const res = await axios.post('http://localhost:3001/calendar/fetchCalendarDates',{email:email});
       console.log(res);
+      if(res.data.msg == "user currently has no dates"){
+        return;
+      }
+
       const array = res.data.data.dates;
 
       if(res.msg == "user currently has no dates"){

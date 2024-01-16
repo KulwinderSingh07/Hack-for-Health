@@ -1,10 +1,6 @@
 import React, { useEffect } from 'react';
 import CalendarMUI from './CalendarMUI';
 import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
-import { Divider, Select } from '@mui/material';
-import {FormControl} from '@mui/material';
-import {InputLabel} from '@mui/material';
-import {MenuItem} from '@mui/material';
 import { useState } from 'react';
 import Sidebar from './Sidebar';
 import axios from 'axios';
@@ -16,37 +12,27 @@ import '../CSS/CalendarMainPage.css';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 
 const CalendarMainPage = () => {
-  const [selectedMonth, setSelectedMonth] = useState(1); // Default to January
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [values,setValues] = useState([]);
-
-  // Assuming you want a range of years, adjust the startYear and endYear accordingly
-  const startYear = 2020;
-  const endYear = new Date().getFullYear() + 5; // Adjust as needed
-
-  const handleChangeMonth = (event) => {
-    setSelectedMonth(event.target.value);
-  };
-
-  const handleChangeYear = (event) => {
-    setSelectedYear(event.target.value);
-  };
+  const email = localStorage.getItem("email");
 
   const apiFetch = async() =>{
-      const res = await axios.post('http://localhost:3001/calendar/fetchCalendarDates',{email:'simar'});
+      const res = await axios.post('http://localhost:3001/calendar/fetchCalendarDates',{email:email});
       console.log(res);
-      const array = res.data.data.dates;
-
-      if(res.msg == "user currently has no dates"){
+      if(res.data.msg == "user currently has no dates"){
         return;
       }
+
+      const array = res.data.data.dates;
+      
       
       let newArray=[];
       for(let i=0;i<array.length;i++){
         newArray.push(array[i]);
       }
 
-      setValues(newArray);
+      const reversedArray = newArray.reverse();
+
+      setValues(reversedArray);
   }
 
   useEffect(()=>{

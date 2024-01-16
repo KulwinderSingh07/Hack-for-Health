@@ -1,55 +1,22 @@
 const exerciseModel = require('../models/exerciseModel');
-const axios = require('axios');
 
-const fetchSuggestedExercises = async(req,res) =>{
-    const {email,username} = req.body;
+const fetchMyExercises = async(req,res) =>{
+    const {email} = req.body;
 
     let findDoc = await exerciseModel.findOne({email});
 
     if(!findDoc){
-        findDoc = await exerciseModel.findOne({username});
-    }
-
-    if(!findDoc){
-        return res.json("msg:No suggested exercises found, please upload report to see suggested exercises");
+        return res.json("msg:No suggested exercises found, please upload pdf report for suggestions");
     }
 
     return res.json({"data":findDoc});
 }
 
-const rapidApiFetch =async(bodyPart)=>{
-    const options = {
-        method: 'GET',
-        url: `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`,
-        params: {limit: '3'},
-        headers: {
-          'X-RapidAPI-Key': '49a6667aa7msh48de9f0b760cd1cp1cb90ajsnaf5f8e52cf00',
-          'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
-        }
-      };
-      
-      try {
-          const response = await axios.request(options);
-          console.log(response.data);
-          return response.data;
-      } catch (error) {
-          console.error(error);
-      }
-}
-
 const addSuggestedExercisesFromPdf = async(req,res) =>{
-    const {email,username,bodyParts} = req.body;
+    const {email,bodyPartsData} = req.body;
 
     let findDoc = await exerciseModel.findOne({email});
-
-    if(findDoc){
-        //then remove the already existing suggested Exercises
-        await exerciseModel.deleteOne({email:email});
-    }
-    // else{
-    //     return res.json({"msg":"Please input pdf report to get exercises suggestion"});
-    // }
-
+    
     //DATE LOGIC
     let objectDate = new Date();
 
@@ -64,28 +31,220 @@ const addSuggestedExercisesFromPdf = async(req,res) =>{
 
     let format = month + "/" + day + "/" + year;
 
-    //Fetching exercises from RAPID API
+    if(!bodyPartsData) return res.json({"msg":"No body parts data feeded"});
+
+    //Making new BodyParts suggested array
     let newSuggestedArray = [];
+    for(let i=0;i<bodyPartsData.length;i++){
+        if(bodyPartsData[i].body_parts){
+         for(let j=0;j<bodyPartsData[i].body_parts.length;j++){
+             newSuggestedArray.push(bodyPartsData[i].body_parts[j]);
+         }
+        }
+     }
+
+    if(!findDoc){
+        //now add in the new exercises
+        const newDoc = new exerciseModel({
+            email:email,
+            date:format,
+            suggestedBodyParts:newSuggestedArray,
+            suggestedExercises: []
+        });
+
+        await newDoc.save();
+        return res.json({"data":newDoc});
+    }else if(findDoc && findDoc.suggestedExercises.length !=0 ){
+        findDoc.suggestedBodyParts = newSuggestedArray;
+        findDoc.suggestedExercises = [];
+
+        await findDoc.save();
+        return res.json({"data":findDoc});
+    }
     
-    for(let i=0;i<bodyParts.length;i++){
-        let val = rapidApiFetch(bodyParts[i]);
-        for(let j=0;j<val.length;j++){
-            newSuggestedArray.push(val[j]);
+    return;
+}
+
+const saveToMyList = async(req,res) => {
+    const {email,exercise} = req.body;
+    const doc = await exerciseModel.findOne({email});
+
+    let objectDate = new Date();
+
+    let day = objectDate.getDate();
+    console.log(day); 
+
+    let month = objectDate.getMonth();
+    console.log(month + 1);
+
+    let year = objectDate.getFullYear();
+    console.log(year);
+
+    let format = month + "/" + day + "/" + year;
+
+    if(!doc){
+        let newExercises = [];
+        const newDoc = new exerciseModel({
+            email:email,
+            date: format
+        });
+
+        newExercises.push([exercise,{"done":false}]);
+        newDoc.suggestedExercises = newExercises;
+        await newDoc.save();
+        return res.json({"msg":"exercise added","data":newDoc});
+    }
+
+    //add exercise to user's list
+    let newExercises = [];
+    if(doc.suggestedExercises.length == 0){
+        newExercises.push([exercise,{"done":false}]);
+        doc.suggestedExercises = newExercises;
+        await doc.save();
+        return res.json({"msg":"exercise added","data":doc});
+    }else{
+        //check wether this exercise  is already present or not
+        let isPresent = false;
+        for(let i=0;i<doc.suggestedExercises.length;i++){
+            console.log('NEEDED ->',doc.suggestedExercises[i][0])
+            if(doc.suggestedExercises[i][0].name == exercise.name){
+                console.log('same');
+                isPresent = true;
+            }
+        }
+
+        if(isPresent == true){
+            return res.json({"msg":"exercise is already present inside DB"});
+        }else{
+            doc.suggestedExercises.push([exercise,{"done":false}]);
+            await doc.save();
+
+            return res.json({"msg":"exercise added","exercise":exercise});
+        }
+    }
+}
+
+const markComplete = async(req,res) =>{
+    const {exerciseName,email} = req.body;
+
+    let findDoc = await exerciseModel.findOne({email});
+    
+    let exercisesData = [];
+    for(let i=0;i<findDoc.suggestedExercises.length;i++){
+        if(findDoc.suggestedExercises[i][0].name == exerciseName){
+            // console.log('FOUND -> ',findDoc.suggestedExercises[i][1].done)
+            // findDoc.suggestedExercises[i][1].done = true;
+            exercisesData.push([findDoc.suggestedExercises[i][0],{"done":true}]);
+        }else{
+            exercisesData.push(findDoc.suggestedExercises[i]);
         }
     }
 
-    //now add in the new exercises
-    const newDoc = new exerciseModel({
-        username:username,
-        email:email,
-        date:format,
-        suggestedBodyParts:bodyParts,
-        suggestedExercises: newSuggestedArray
-    });
+    let copy = new exerciseModel({
+        email:findDoc.email,
+        date:findDoc.date,
+        suggestedBodyParts:findDoc.suggestedBodyParts,
+        suggestedExercises:exercisesData
+    })
 
-    await newDoc.save();
+    //delete old document
+    await exerciseModel.deleteOne({email});
+    
+    //putting in the new document
+    await copy.save();
 
-    return res.json({"data":newDoc});
+    return res.json({"msg":"marked exercise as completed","doc":copy});
 }
 
-module.exports = {fetchSuggestedExercises,addSuggestedExercisesFromPdf};
+const markNotComplete = async(req,res) =>{
+    const {exerciseName,email} = req.body;
+
+    let findDoc = await exerciseModel.findOne({email});
+
+    if(!findDoc) return res.json({"msg":"no exercises"});
+    
+    let exercisesData = [];
+    for(let i=0;i<findDoc.suggestedExercises.length;i++){
+        if(findDoc.suggestedExercises[i][0].name == exerciseName){
+            // console.log('FOUND -> ',findDoc.suggestedExercises[i][1].done)
+            // findDoc.suggestedExercises[i][1].done = true;
+            exercisesData.push([findDoc.suggestedExercises[i][0],{"done":false}]);
+        }else{
+            exercisesData.push(findDoc.suggestedExercises[i]);
+        }
+    }
+
+    let copy = new exerciseModel({
+        email:findDoc.email,
+        date:findDoc.date,
+        suggestedBodyParts:findDoc.suggestedBodyParts,
+        suggestedExercises:exercisesData
+    })
+
+    //delete old document
+    await exerciseModel.deleteOne({email});
+    
+    //putting in the new document
+    await copy.save();
+
+    return res.json({"msg":"marked exercise as not completed","doc":copy});
+}
+
+const removeFromList = async(req,res) =>{
+    const {exerciseName,email} = req.body;
+
+    let findDoc = await exerciseModel.findOne({email});
+    
+    let exercisesData = [];
+    for(let i=0;i<findDoc.suggestedExercises.length;i++){
+        if(findDoc.suggestedExercises[i][0].name == exerciseName){
+            // console.log('FOUND -> ',findDoc.suggestedExercises[i][1].done)
+            // findDoc.suggestedExercises[i][1].done = true;
+            continue;
+        }else{
+            exercisesData.push(findDoc.suggestedExercises[i]);
+        }
+    }
+
+    let copy = new exerciseModel({
+        email:findDoc.email,
+        date:findDoc.date,
+        suggestedBodyParts:findDoc.suggestedBodyParts,
+        suggestedExercises:exercisesData
+    })
+
+    //delete old document
+    await exerciseModel.deleteOne({email});
+    
+    //putting in the new document
+    await copy.save();
+
+    return res.json({"msg":"deleted exercise successfully","doc":copy});
+}
+
+const checkIfAllComplete = async(req,res) =>{
+    const {email} = req.body;
+
+    let allDone = true;
+
+    let findDoc = await exerciseModel.findOne({email});
+    
+    if(!findDoc){
+        return res.json({done:false});
+    }
+
+    for(let i=0;i<findDoc.suggestedExercises.length;i++){
+        if(findDoc.suggestedExercises[i][1].done == false){
+            allDone = false;
+            break;
+        }
+    }
+
+    if(allDone == true){
+        return res.json({done:true});
+    }else{
+        return res.json({done:false});
+    }
+}
+
+module.exports = {fetchMyExercises,addSuggestedExercisesFromPdf,saveToMyList,markComplete,markNotComplete,removeFromList,checkIfAllComplete};

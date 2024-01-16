@@ -9,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
+import axios from 'axios';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -24,8 +25,17 @@ const PopUpCompoent = ({open,setOpen,title,pdfReportData,bodyPartsData}) => {
       setOpen(false);
     };
 
+    const setBodyPartsInDB = async(email) => {
+      const res = await axios.post('http://localhost:3001/exercise/addSuggestedExercisesFromPdf',{email,bodyPartsData});
+      console.log('Response on saving BodyParts In DB :',res);
+      return;
+    }
+
     useEffect(()=>{
-      console.log('Body Parts inside popup-comPONENT=>',bodyPartsData)
+      const email = localStorage.getItem("email");
+
+      //set new body parts
+      setBodyPartsInDB(email);
     },[bodyPartsData])
 
     function getFoodString(arr){
@@ -61,6 +71,7 @@ const PopUpCompoent = ({open,setOpen,title,pdfReportData,bodyPartsData}) => {
               position: 'absolute',
               right: 8,
               top: 8,
+              marginLeft:'10px',
               color: (theme) => theme.palette.grey[500],
             }}
             >

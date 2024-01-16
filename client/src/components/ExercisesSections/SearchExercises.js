@@ -14,30 +14,20 @@ import GymData from '../../data/gymExercises.json';
 
 const searchTermEnum = ["back","cardio","chest","lower arms","lower legs","neck","shoulders","upper arms","upper legs","waist"];
 
-const SearchExercises = () => {
+const SearchExercises = ({setMyExercises}) => {
+    const email = localStorage.getItem("email");
     const [array,setArray] = useState([]);
     const [searchTerm,setSearchTerm] = useState("");
 
-    // let secondaryCheck = (val,searchingItem)=>{
-    //     return val.secondaryMuscles.indexOf(searchingItem);
-    // }
+    const saveToMyList = async(exercise)=>{
+      console.log('add call')
+      const res = await axios.post('http://localhost:3001/exercise/saveToMyList',{email,exercise});
+      console.log(res.data);
 
-    // const handleSearch = () =>{
-        //Search criteria : BodyPart, Name of exercise, target muscles, secondary muscles
-        // let bodyCriteria = val.bodyPart.toLowerCase().includes(searchTerm.toLowerCase());
-        // let nameCriteria = val.name.toLowerCase().includes(searchTerm.toLowerCase());
-        // let targetMusclesCriteria = val.target.toLowerCase().includes(searchTerm.toLowerCase());
-        // let secondaryMusclesCriteria = val.secondaryMuscles.toLowerCase().includes(searchTerm.toLowerCase());
+      setMyExercises(res);
+    }
 
-        // const newData = GymData.filter((val)=>{
-        //     if(searchTerm == ""){
-        //         return val;
-        //     }else if(val.bodyPart.toLowerCase().includes(searchTerm.toLowerCase()) || val.name.toLowerCase().includes(searchTerm.toLowerCase()) || val.target.toLowerCase().includes(searchTerm.toLowerCase()) || secondaryCheck(val,searchTerm.toLowerCase())!=-1){
-        //         return val;
-        //     }
-        // });
 
-    // }
 
     //API EXERCISE FETCHING BASED ON BODY PART
     const options = {
@@ -138,13 +128,11 @@ const SearchExercises = () => {
                 </div>
                 </AccordionDetails>
 
-                <div className='exerciseMarkingButtonsDiv'>
-
-                    <div className='addToListDIv'>
+                <div onClick={()=>{saveToMyList(exercise)}} className='exerciseMarkingButtonsDiv'>
+                    <div  className='addToListDIv'>
                       <AssignmentReturnIcon sx={{marginRight:'10px'}}/>
                       <h3>Add Exercise to Suggested List</h3>
                     </div>
-                    
                   </div>
               </Accordion>
                 
