@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from './Sidebar';
 
 //CSS Imports
@@ -10,6 +10,7 @@ import MyExercises from './ExercisesSections/MyExercises';
 import SearchExercises from './ExercisesSections/SearchExercises';
 
 const ExercisesPage = () => {
+  const [myExercises,setMyExercises] = useState();
   // console.log(GymData);
 
   //GYM DATA FETCHING :
@@ -41,12 +42,12 @@ const ExercisesPage = () => {
     <>
         <Sidebar/>
         <div className='exerisesMainDiv'>
-        <MyExercises/>
+        <MyExercises myExercises={myExercises}/>
 
         <Divider sx={{backgroundColor:'white'}} orientation='vertical' flexItem/>
 
         {/*Search Exercises */}
-        <SearchExercises/>
+        <SearchExercises setMyExercises={setMyExercises}/>
         </div>
     </>
     

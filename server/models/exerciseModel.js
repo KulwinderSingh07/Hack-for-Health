@@ -10,7 +10,12 @@ const exerciseSchema=mongoose.Schema({
         type:Array
     },
     suggestedExercises:{
-        type:Array
+        type: [
+            // Define the type of elements inside the dates array
+            {
+                type: [mongoose.Schema.Types.Mixed] // Array of integers
+            }
+        ]
     }
 })
 const exerciseModel=mongoose.model("exerciseModel",exerciseSchema)

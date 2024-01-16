@@ -17,11 +17,12 @@ import '../../CSS/MyExercises.css';
 //GYM LOCAL DATA
 import GymData from '../../data/gymExercises.json';
 
-const MyExercises = () => {
+const MyExercises = ({myExercises}) => {
   // const [GymData,setGymData] = useState([]);
-  const [username,setUsername] = useState("");
-  const [email,setEmail] = useState("");
-  const [completedMsg,setCompletedMsg] = useState();
+  const email = localStorage.getItem("email");
+  const [suggestedBodyParts,setSuggestedBodyParts] = useState(null);
+  const [suggestedExercises,setSuggestedExercises] = useState(null);
+  const [allCompleted,setAllCompleted] = useState(false);
 
 
 //Accordian Colors concept:
@@ -30,38 +31,79 @@ const MyExercises = () => {
 
 
   const fetchGymData = async()=>{
-    try {
-      const response = await axios.post('http://localhost:3001/exercise/fetchSuggestedExercises',{username,email});
-      console.log(response.data);
-      // setGymData(response.data);
-    } catch (error) {
-      console.error(error);
-    }
+      const res = await axios.post('http://localhost:3001/exercise/fetchMyExercises',{email});
+      console.log(res.data.data);
+
+      if(res.data.data == undefined){
+        return;
+      }
+
+      setSuggestedBodyParts(res.data.data.suggestedBodyParts);
+      setSuggestedExercises(res.data.data.suggestedExercises);
   }
 
-  const markDone = () =>{
-    console.log('mark done');
+  const markExerciseCompleted = async(exerciseName) => {
+    const res = await axios.post('http://localhost:3001/exercise/markComplete',{exerciseName,email});
+    console.log(res);
+    fetchGymData();
+    checkIfAllComplete();
+  }
+
+  const markExerciseNotCompleted = async(exerciseName) => {
+    const res = await axios.post('http://localhost:3001/exercise/markNotComplete',{exerciseName,email});
+    console.log(res);
+    fetchGymData();
+    checkIfAllComplete();
+  }
+
+  const removeFromList = async(exerciseName) => {
+    const res = await axios.post('http://localhost:3001/exercise/removeFromList',{exerciseName,email});
+    console.log(res);
+    fetchGymData();
+    checkIfAllComplete();
+  }
+
+  const checkIfAllComplete = async() =>{
+    const res = await axios.post('http://localhost:3001/exercise/checkIfAllComplete',{email});
+    console.log(res);
+    setAllCompleted(res.data.done);
   }
 
   useEffect(()=>{
-      // fetchGymData();
+      fetchGymData();
+      checkIfAllComplete();
   },[])
+
+  useEffect(()=>{
+    fetchGymData();
+  },[myExercises])
   
 
   return (
     <>
     <div className='myExercises'>
         <div className='exercisesSuggestionHeader'>
-        <AccessibilityNewIcon sx={{fontSize:'2vw',marginRight:'15px',marginTop:'-0.2vw'}}/><h3 className='exercisesHeaderText'>SUGGESTED EXERCISES BASED ON LAST REPORT UPLOAD</h3>
+        <AccessibilityNewIcon sx={{fontSize:'2vw',marginRight:'15px',marginTop:'-0.2vw'}}/><h3 className='exercisesHeaderText'>YOUR EXERCISE LIST</h3>
         </div>
+
+        <h2 style={{color:'white'}}>Suggested Body Parts for exercise based on previous report upload are :</h2>
+
+        <div style={{display:'flex',justifyContent:'center',alignItems:'center',flexWrap:'wrap'}}>
+          {
+            suggestedBodyParts!=null?suggestedBodyParts.map((item)=>{
+              return (<h2 style={{padding:'5px',backgroundColor:'orange',color:'white',borderRadius:'10px'}}>{item}</h2>);
+            }) : <></>
+          }
+        </div>
+        
 
         {/*My Exercises Rendering below*/}
         <div className='myExercisesMap'>
         {
-          GymData?GymData.map((exercise,indexMain)=>{
+          suggestedExercises?suggestedExercises.map((exercise,indexMain)=>{
             return (
               <>
-              <Accordion className='accordianMaterialUi' sx={{backgroundImage:exercise.completed?completedColor:notCompletedColor,marginTop:'0.5vw',marginBottom:'0.5vw'}}>
+              <Accordion className='accordianMaterialUi' sx={{backgroundImage:exercise[1].done?completedColor:notCompletedColor,marginTop:'0.5vw',marginBottom:'0.5vw'}}>
                 <AccordionSummary
                   expandIcon={
                     <ExpandMoreIcon />
@@ -71,37 +113,37 @@ const MyExercises = () => {
 
                   sx={{fontSize:'0.5vw',display:'flex',justifyContent:'space-between',alignItems:'center'}}
                 >
-                  <h1 style={{color:'white'}}>{exercise.name.toUpperCase()}</h1>
+                  <h1 style={{color:'white'}}>{exercise[0].name.toUpperCase()}</h1>
 
                 </AccordionSummary>
 
                 <AccordionDetails>
                 <div className='exerciseCardDiv'>
                   
-                  <img src={exercise.gifUrl} style={{height:'30vh'}}/>
+                  <img src={exercise[0].gifUrl} style={{height:'30vh'}}/>
                   <div className='exerciseInfoDiv'>
                     <h2>Exercise Name : </h2>
-                    <p>{exercise.name.toUpperCase()}</p>
+                    <p>{exercise[0].name.toUpperCase()}</p>
 
                     <h2>Equipment Needed: </h2>
-                    <p>{exercise.equipment.toUpperCase()}</p>
+                    <p>{exercise[0].equipment.toUpperCase()}</p>
 
                     <h2>Body Part : </h2>
-                    <p>{exercise.bodyPart.toUpperCase()}</p>
+                    <p>{exercise[0].bodyPart.toUpperCase()}</p>
 
                     <h2>Instructions :</h2>
                     <div className='stepsDiv'>
-                      {exercise.instructions.map((item,index)=>{
+                      {exercise[0].instructions.map((item,index)=>{
                           return <p>{index+1}. {item}</p>;
                         })}
                     </div>
                       
 
                     <h2>Target Muscles : </h2>
-                    <p>{exercise.target.toUpperCase()}</p>
+                    <p>{exercise[0].target.toUpperCase()}</p>
 
                     <h2>Secondary Engaged Muscles :</h2>
-                    {exercise.secondaryMuscles.map((item)=>{
+                    {exercise[0].secondaryMuscles.map((item)=>{
                       return <p>{item.toUpperCase()}</p>
                     })}
 
@@ -110,15 +152,15 @@ const MyExercises = () => {
                 </AccordionDetails>
 
                 <div className='exerciseMarkingButtonsDiv'>
-                    <div className='completedCheckDiv'>
+                    <div onClick={()=>{markExerciseCompleted(exercise[0].name)}} className='completedCheckDiv'>
                       <ThumbUpAltIcon sx={{marginRight:'10px'}}/>
                       <h3>Mark exercise as Completed</h3>
                     </div>
-                    <div className='notCompletedCheckDiv'>
+                    <div onClick={()=>{markExerciseNotCompleted(exercise[0].name)}} className='notCompletedCheckDiv'>
                       <CancelIcon sx={{marginRight:'10px'}}/>
                       <h3>Mark exercise as not Completed</h3>
                     </div>
-                    <div className='removeExerciseDiv'>
+                    <div onClick={()=>{removeFromList(exercise[0].name)}} className='removeExerciseDiv'>
                       <DeleteOutlineIcon sx={{marginRight:'10px'}}/>
                       <h3>Remove exercise</h3>
                     </div>
@@ -132,15 +174,17 @@ const MyExercises = () => {
         }
         </div>
 
-        <div onClick={()=>{markDone()}} className='removeExerciseDiv' style={{marginLeft:'2.5vw',marginRight:'2.5vw',backgroundColor:'#0067ff',borderColor:'#244eae'}}>
+        {/* <div onClick={()=>{markDone()}} className='removeExerciseDiv' style={{marginLeft:'2.5vw',marginRight:'2.5vw',backgroundColor:'#0067ff',borderColor:'#244eae'}}>
             <FileDownloadDoneIcon sx={{marginRight:'10px'}}/>
             <h3>Mark exercises done for the day</h3>
-        </div>
+        </div> */}
 
-        <div style={{color:'white',display:'flex',justifyContent:'center',alignContent:'center',fontSize:'1vw',margin:'1vw'}}>
+        {allCompleted ?
+        <div style={{padding:'1vw',color:'white',display:'flex',justifyContent:'center',alignContent:'center',fontSize:'1vw',margin:'1vw'}}>
         <h3>Congratulations, all exercises completed for the day</h3>
         <CelebrationIcon/>
-        </div>
+        </div> : <></>
+        }
         </div>
     </>
   )

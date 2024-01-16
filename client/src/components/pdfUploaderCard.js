@@ -2,7 +2,6 @@ import "../CSS/cardComponents.css"
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import IconButton from '@mui/material/IconButton';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import Typography from '@mui/material/Typography';
 import { useState } from "react";
 import  axios from "axios";
 
