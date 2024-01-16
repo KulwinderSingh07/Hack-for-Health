@@ -7,8 +7,10 @@ import { useState } from "react";
 import  axios from "axios";
 
 
-const PdfUploaderCardComponent = ({setPdfReportData}) => {
+const PdfUploaderCardComponent = ({setPdfReportData,setBodyPartsData}) => {
     const [file, setFile] = useState(undefined)
+    const email = localStorage.getItem("email");
+
     const uploadReport=async (e)=>{
         e.preventDefault();
         console.log(file.name)
@@ -17,9 +19,23 @@ const PdfUploaderCardComponent = ({setPdfReportData}) => {
         console.log(formData)
         const resp=await axios.post("http://3.109.238.31:4001/extract",formData)
         console.log(resp.data)
+        
+        //iterating inside resp.data
+        let bodyPartDataArray = []
+        for(let i=0;i<resp.data.length;i++){
+            if(resp.data[i].body_parts){
+                for(let j=0;j<resp.data[i].body_parts.length;j++){
+                    // console.log('IN PDFUPLOADER BODY PART ->',resp.data[i].body_parts[j]);
+                    bodyPartDataArray.push(resp.data[i].body_parts[j]);
+                }
+            }
+        }
+
+        setBodyPartsData(bodyPartDataArray);
+
         const dataForSending={
             fileName:file.name,
-            email:"laddi",
+            email:email,
             vitalData:resp.data
         }
         const reportDocument=await axios.post("http://localhost:3001/pdfHistory/create",dataForSending)
@@ -30,7 +46,7 @@ const PdfUploaderCardComponent = ({setPdfReportData}) => {
             <div className="Card">
                 <div className="cardContent">
             <div className="leftCardPart">
-                <h2>UPLOAD REPORT</h2>
+                <h2 style={{marginTop:'0vw',marginBottom:'0.5vw'}}>UPLOAD REPORT</h2>
                 <label className="inputLabel" style=    {{background:file!=undefined?'#5cc75c':'#00d0c2'}}>
                     <input type="file" className="fileUploader" onChange={(e)=>{
                         setFile(e.target.files[0])
