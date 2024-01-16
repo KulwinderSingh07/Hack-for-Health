@@ -1,5 +1,7 @@
 # Overview
 
+<img src="https://github.com/KulwinderSingh07/Hack-for-Health/assets/92221517/d1963640-48c7-4cb6-a6f1-acf6b2eebca3" width="400" />
+
 This GitHub repository hosts an AI-driven system designed to enhance individual health management and facilitate remote patient monitoring for healthcare providers. The system leverages artificial intelligence to provide personalized health recommendations based on an individual's medical history, genetics, and lifestyle. Additionally, it allows healthcare providers to remotely monitor patients' vital signs and health metrics in real-time, enabling early intervention and reducing hospital readmissions.
 
 
