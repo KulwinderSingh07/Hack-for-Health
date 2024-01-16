@@ -110,7 +110,7 @@ Steps :
 1. Make an account on the website URL.
 2. Upload symptoms in symptoms section to get predicted disease.
 3. Upload pdf medical report for food and exercise suggestions.
-4. Review Vitals remotely by connecting sart devices such as apple iwatch (Currently the data in vitals is dummy for visualisation purposes).
+4. Review Vitals remotely by connecting smart devices such as apple iwatch (Currently the data in vitals is dummy for visualisation purposes).
 
 # External Requirements
 
