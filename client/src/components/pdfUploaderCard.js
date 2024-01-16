@@ -29,7 +29,7 @@ const PdfUploaderCardComponent = ({setPdfReportData,setBodyPartsData}) => {
             email:email,
             vitalData:resp.data
         }
-        const reportDocument=await axios.post("http://localhost:3001/pdfHistory/create",dataForSending)
+        const reportDocument=await axios.post("https://gfg-backend.onrender.com/pdfHistory/create",dataForSending)
         console.log(reportDocument.data)
         setPdfReportData(reportDocument.data)
     }

@@ -82,7 +82,7 @@ const UploadHistoryPage = () => {
     const credentials={
       email:email
     }
-    const historyData=await axios.post("http://localhost:3001/pdfHistory/fetchPdfHistory",credentials)
+    const historyData=await axios.post("https://gfg-backend.onrender.com/pdfHistory/fetchPdfHistory",credentials)
     console.log(historyData.data)
     setReportHistoryPDFList(historyData.data)
   }

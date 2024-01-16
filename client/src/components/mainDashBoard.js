@@ -59,7 +59,7 @@ const MainDashBoardComponent = () => {
                 Symptoms:symptomsList
             }
 
-            const createdPredictionHistoryDocument=await axios.post("http://localhost:3001/symptomsPrediction/create",predictionHistoryDocumentDat)
+            const createdPredictionHistoryDocument=await axios.post("https://gfg-backend.onrender.com/symptomsPrediction/create",predictionHistoryDocumentDat)
             console.log(createdPredictionHistoryDocument)
 
             if(createdPredictionHistoryDocument.status==200){
@@ -67,7 +67,7 @@ const MainDashBoardComponent = () => {
                 const credential={
                     email:email
                 }
-                const fetChedPredictionHistory=await axios.post("http://localhost:3001/symptomsPrediction/getPredictionHistory",credential)
+                const fetChedPredictionHistory=await axios.post("https://gfg-backend.onrender.com/symptomsPrediction/getPredictionHistory",credential)
                 let sortedData=fetChedPredictionHistory.data.sort((a, b) => new Date(b.predictionTime) - new Date(a.predictionTime));
                 setSymptomsPredictionHistory(sortedData)
                 setsymptomsList([])
@@ -79,7 +79,7 @@ const MainDashBoardComponent = () => {
         const credential={
             email:email
         }
-        const fetchedHistory=await axios.post("http://localhost:3001/symptomsPrediction/getPredictionHistory",credential)
+        const fetchedHistory=await axios.post("https://gfg-backend.onrender.com/symptomsPrediction/getPredictionHistory",credential)
         // fetchedHistory.data.sort((a, b) => a.predictionTime - b.predictionTime);
         let sortedData=fetchedHistory.data.sort((a, b) => new Date(b.predictionTime) - new Date(a.predictionTime));
         setSymptomsPredictionHistory(sortedData);
@@ -95,7 +95,7 @@ const MainDashBoardComponent = () => {
 
     const handlePatientData=async(data)=>{
         setSelectedButton(data)
-        const Incominggraphdata=await axios.get(`http://localhost:3001/vital/${endPoints[data]}`)
+        const Incominggraphdata=await axios.get(`https://gfg-backend.onrender.com/vital/${endPoints[data]}`)
         console.log(Incominggraphdata.data)
         setGraphData(Incominggraphdata.data)
     }
