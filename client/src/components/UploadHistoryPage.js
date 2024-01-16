@@ -21,6 +21,7 @@ import axios from 'axios';
 const UploadHistoryPage = () => {
   const [openPopUp, setOpenPopUp] = useState(-1)
   const [reportHistoryPDFList, setReportHistoryPDFList] = useState([])
+  const email = localStorage.getItem("email");
 
   const ListData=[
     {
@@ -79,7 +80,7 @@ const UploadHistoryPage = () => {
 
   const FetchHistory=async()=>{
     const credentials={
-      email:"laddi"
+      email:email
     }
     const historyData=await axios.post("http://localhost:3001/pdfHistory/fetchPdfHistory",credentials)
     console.log(historyData.data)

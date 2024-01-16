@@ -18,7 +18,7 @@ const DietCardComponent = ({handleDietClickOpen}) => {
                 </IconButton>
                 <h3>Click to Expand</h3>
                     </div>
-                <h3>Total Number of Diet Items:12</h3>
+                {/* <h3>Total Number of Diet Items:12</h3> */}
             </div>
             <div className="rightCardPart">
                 <div className="cardLogo"><FoodBankIcon fontSize="large"/></div>

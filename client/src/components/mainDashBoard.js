@@ -12,8 +12,12 @@ import SymptomSelectorCompoent from "./symptomsDropDownCompoent";
 import SpeedIcon from '@mui/icons-material/Speed';
 import  axios from "axios";
 
+import { useLocation } from 'react-router-dom';
+
 const MainDashBoardComponent = () => {
+    const location = useLocation();
     const [openExercise, setOpenExercise] = useState(false)
+    const [bodyPartsData,setBodyPartsData] = useState();
 
     const [selectedButton, setSelectedButton] = useState(-1)
 
@@ -23,6 +27,7 @@ const MainDashBoardComponent = () => {
     const [openDiet, setOpenDiet] = useState(false)
 
     const [symptomsList, setsymptomsList] = useState([])
+    const email = location.state?.email || 'simar';
     
 
     const [symptomsPredictionHistory, setSymptomsPredictionHistory] = useState([])
@@ -46,7 +51,7 @@ const MainDashBoardComponent = () => {
             
             const predictionHistoryDocumentDat={
                 predictedDisease:PredictedData.data.disease_prediction,
-                userEmail:'laddi',
+                userEmail:email,
                 Symptoms:symptomsList
             }
 
@@ -56,7 +61,7 @@ const MainDashBoardComponent = () => {
             if(createdPredictionHistoryDocument.status==200){
                 console.log(createdPredictionHistoryDocument.data)
                 const credential={
-                    email:"laddi"
+                    email:email
                 }
                 const fetChedPredictionHistory=await axios.post("http://localhost:3001/symptomsPrediction/getPredictionHistory",credential)
                 console.log(fetChedPredictionHistory.data)
@@ -69,7 +74,7 @@ const MainDashBoardComponent = () => {
     
     const fetchPredictionHistory=async()=>{
         const credential={
-            email:"laddi"
+            email:email
         }
         const fetchedHistory=await axios.post("http://localhost:3001/symptomsPrediction/getPredictionHistory",credential)
         fetchedHistory.data.sort((a, b) => a.predictionTime - b.predictionTime);
@@ -164,9 +169,9 @@ const MainDashBoardComponent = () => {
                 
 
             <div className="OperationCardsWrapper">
-                <PdfUploaderCardComponent setPdfReportData={setPdfReportData}/>
-                <ExerciseCardComponent  handleExerClickOpen={handleExerClickOpen} pdfReportData={pdfReportData}/>
-                <PopUpCompoent open={openExercise} setOpen={setOpenExercise} data={data}/>
+                <PdfUploaderCardComponent setPdfReportData={setPdfReportData} setBodyPartsData={setBodyPartsData}/>
+                <ExerciseCardComponent  handleExerClickOpen={handleExerClickOpen} bodyPartsData={bodyPartsData} pdfReportData={pdfReportData} title={"Suggested Target Body Parts"}/>
+                <PopUpCompoent open={openExercise} setOpen={setOpenExercise} pdfReportData={pdfReportData} title={"Suggested Target Body Parts"}/>
                 <DietCardComponent handleDietClickOpen={handleDietClickOpen}/>
                 <PopUpCompoent open={openDiet} setOpen={setOpenDiet} pdfReportData={pdfReportData} title={"Recommended Food Items"}/>
             </div>

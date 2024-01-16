@@ -30,7 +30,7 @@ const LoginPage = () => {
       console.log(res);
       if(res.data.exists == true){
         localStorage.setItem("email",email);
-        navigate('/dashboard');//navigate to main dashboard
+        navigate('/dashboard',{state:{email:email}});//navigate to main dashboard
       }
     }else{
       //SIGN UP HANDLE
@@ -44,7 +44,7 @@ const LoginPage = () => {
       if(res.data.exists == false){
         localStorage.setItem("email",email);
         localStorage.setItem("username",username);
-        navigate('/dashboard');//navigate to main dashboard
+        navigate('/dashboard',{state:{email:email}});//navigate to main dashboard
       }else{
         return;
       }

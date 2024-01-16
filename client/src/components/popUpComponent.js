@@ -19,7 +19,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-const PopUpCompoent = ({open,setOpen,title,pdfReportData}) => {
+const PopUpCompoent = ({open,setOpen,title,pdfReportData,bodyPartsData}) => {
     const handleClose = () => {
       setOpen(false);
     };
@@ -66,7 +66,7 @@ const PopUpCompoent = ({open,setOpen,title,pdfReportData}) => {
             <Typography gutterBottom>
              File Name : {pdfReportData?pdfReportData.fileName:""}
             </Typography>
-            {pdfReportData!=undefined?pdfReportData.FoodItems.map((val)=>{
+            {title == "Recommended Food Items" && pdfReportData!=undefined ? pdfReportData.FoodItems.map((val)=>{
               return (
                 <>
             <Typography gutterBottom>
@@ -79,9 +79,18 @@ const PopUpCompoent = ({open,setOpen,title,pdfReportData}) => {
               )
             })
           :
-          <Typography>
-            Hello
-          </Typography>
+          title == "Suggested Target Body Parts" && bodyPartsData!=undefined ? bodyPartsData.map((val)=>{
+            return (
+              <>
+              <Typography>
+                File Name : {pdfReportData?pdfReportData.fileName:""}
+              </Typography>
+              <Typography>
+               BodyPart: {val}
+            </Typography>
+            </>
+            )
+          }):<></>
           }
             <Typography gutterBottom>
               
