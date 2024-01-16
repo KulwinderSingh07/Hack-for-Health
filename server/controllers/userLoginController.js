@@ -3,7 +3,7 @@ const userLoginModel = require('../models/UserLoginModel');
 const loginUserFunction = async(req,res) => {
     const {email,password} = req.body;
 
-    const findDoc = await userLoginModel.findOne({email,password});
+    const findDoc = await userLoginModel.findOne({email});
     if(!findDoc){
         return res.json({"msg":"User not found inside DB","exists":false});
     }

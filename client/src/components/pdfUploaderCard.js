@@ -18,20 +18,9 @@ const PdfUploaderCardComponent = ({setPdfReportData,setBodyPartsData}) => {
         formData.append('pdf_file',file);
         console.log(formData)
         const resp=await axios.post("http://3.109.238.31:4001/extract",formData)
-        console.log(resp.data)
+        console.log('resp.data',resp.data)
         
-        //iterating inside resp.data
-        let bodyPartDataArray = []
-        for(let i=0;i<resp.data.length;i++){
-            if(resp.data[i].body_parts){
-                for(let j=0;j<resp.data[i].body_parts.length;j++){
-                    // console.log('IN PDFUPLOADER BODY PART ->',resp.data[i].body_parts[j]);
-                    bodyPartDataArray.push(resp.data[i].body_parts[j]);
-                }
-            }
-        }
-
-        setBodyPartsData(bodyPartDataArray);
+        setBodyPartsData(resp.data);
 
         const dataForSending={
             fileName:file.name,
