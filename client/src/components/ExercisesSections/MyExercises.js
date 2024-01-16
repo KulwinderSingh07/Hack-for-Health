@@ -23,6 +23,7 @@ const MyExercises = ({myExercises}) => {
   const [suggestedBodyParts,setSuggestedBodyParts] = useState(null);
   const [suggestedExercises,setSuggestedExercises] = useState(null);
   const [allCompleted,setAllCompleted] = useState(false);
+  const [completionMsg,setCompletionMsg] = useState("");
 
 
 //Accordian Colors concept:
@@ -67,6 +68,22 @@ const MyExercises = ({myExercises}) => {
     const res = await axios.post('http://localhost:3001/exercise/checkIfAllComplete',{email});
     console.log(res);
     setAllCompleted(res.data.done);
+
+      //DATE LOGIC DAY/MONTH/YEAR
+      let objectDate = new Date();
+      let day = objectDate.getDate();
+      let month = objectDate.getMonth();
+      let year = objectDate.getFullYear();
+    if(res.data.done == true){
+      const res = await axios.post('http://localhost:3001/calendar/addCalendarDate',{email,day,month:month+1,year});
+      console.log(res);
+      setCompletionMsg("Congratulations, all exercises completed for the day");
+    }else{
+      const res = await axios.post('http://localhost:3001/calendar/deleteCalendarDate',{email,day,month:month+1,year});
+      console.log(res);
+      setCompletionMsg("");
+    }
+
   }
 
   useEffect(()=>{
@@ -181,7 +198,7 @@ const MyExercises = ({myExercises}) => {
 
         {allCompleted ?
         <div style={{padding:'1vw',color:'white',display:'flex',justifyContent:'center',alignContent:'center',fontSize:'1vw',margin:'1vw'}}>
-        <h3>Congratulations, all exercises completed for the day</h3>
+        <h3>{completionMsg}</h3>
         <CelebrationIcon/>
         </div> : <></>
         }

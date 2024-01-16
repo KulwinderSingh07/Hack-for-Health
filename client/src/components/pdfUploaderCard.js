@@ -12,6 +12,9 @@ const PdfUploaderCardComponent = ({setPdfReportData,setBodyPartsData}) => {
 
     const uploadReport=async (e)=>{
         e.preventDefault();
+
+        if(file == undefined) return;
+
         console.log(file.name)
         const formData= new FormData()
         formData.append('pdf_file',file);

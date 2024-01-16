@@ -13,9 +13,6 @@ const calendarSchema=mongoose.Schema({
                 type: [mongoose.Schema.Types.Mixed] // Array of integers
             }
         ]
-    },
-    time:{
-        type:String
     }
 })
 

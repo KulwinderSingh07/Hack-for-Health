@@ -69,8 +69,30 @@ const saveToMyList = async(req,res) => {
     const {email,exercise} = req.body;
     const doc = await exerciseModel.findOne({email});
 
+    let objectDate = new Date();
+
+    let day = objectDate.getDate();
+    console.log(day); 
+
+    let month = objectDate.getMonth();
+    console.log(month + 1);
+
+    let year = objectDate.getFullYear();
+    console.log(year);
+
+    let format = month + "/" + day + "/" + year;
+
     if(!doc){
-        return res.json({"msg":"user not found"});
+        let newExercises = [];
+        const newDoc = new exerciseModel({
+            email:email,
+            date: format
+        });
+
+        newExercises.push([exercise,{"done":false}]);
+        newDoc.suggestedExercises = newExercises;
+        await newDoc.save();
+        return res.json({"msg":"exercise added","data":newDoc});
     }
 
     //add exercise to user's list
@@ -138,6 +160,8 @@ const markNotComplete = async(req,res) =>{
     const {exerciseName,email} = req.body;
 
     let findDoc = await exerciseModel.findOne({email});
+
+    if(!findDoc) return res.json({"msg":"no exercises"});
     
     let exercisesData = [];
     for(let i=0;i<findDoc.suggestedExercises.length;i++){
@@ -204,12 +228,8 @@ const checkIfAllComplete = async(req,res) =>{
     let allDone = true;
 
     let findDoc = await exerciseModel.findOne({email});
-
-    if(findDoc.suggestedExercises.length == 0){
-        return res.json({done:false});
-    }
     
-    if(!findDoc.suggestedExercises){
+    if(!findDoc){
         return res.json({done:false});
     }
 
